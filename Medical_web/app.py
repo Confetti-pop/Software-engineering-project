@@ -23,23 +23,40 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
+        print("📥 GET /login")
         return render_template('login.html')
 
-    try:
-        data = request.get_json(force=True)
-        username = data.get('username')
-        password = data.get('password')
-    except Exception as e:
-        print("❌ Error parsing JSON:", e)
-        return jsonify({'success': False, 'message': 'Invalid JSON'}), 400
+    print("📥 POST /login received")
+
+    if request.is_json:
+        try:
+            data = request.get_json(force=True)
+            username = data.get('username')
+            password = data.get('password')
+        except Exception as e:
+            print("❌ Error parsing JSON:", e)
+            return jsonify({'success': False, 'message': 'Invalid JSON'}), 400
+    else:
+        username = request.form.get('username')
+        password = request.form.get('password')
+        print(f"🔐 Form data → Username: {username}, Password: {password}")
 
     user = users.get(username)
     if user and user['password'] == password:
         session['username'] = username
         session['role'] = user['role']
-        return jsonify({'success': True, 'role': user['role'], 'name': user['name']})
+        print(f"✅ Logged in: {username} ({user['role']})")
+
+        if request.is_json:
+            return jsonify({'success': True, 'role': user['role'], 'name': user['name']})
+        else:
+            return redirect(url_for('dashboard'))
     else:
-        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+        print("❌ Invalid credentials")
+        if request.is_json:
+            return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+        else:
+            return render_template('login.html', error='Invalid credentials')
 
 
 @app.route('/dashboard')
