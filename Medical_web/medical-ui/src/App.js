@@ -11,7 +11,7 @@ function App() {
     setError('');
 
     try {
-      const res = await fetch('http:127.0.0.1:5000/login', {
+      const res = await fetch('https://software-engineering-project-h2hj.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({ username, password }),
@@ -31,7 +31,7 @@ function App() {
   };
 
   const handleLogout = async () => {
-    await fetch('http://127.0.0.1:5000/logout', {credentials: 'include' });
+    await fetch('https://software-engineering-project-h2hj.onrender.com/logout', {credentials: 'include' });
     setUser(null);
     setUsername('');
     setPassword('');
