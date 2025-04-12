@@ -37,6 +37,11 @@ def login():
         return jsonify({'success': True, 'role': user['role'], 'name': user['name']})
     else:
         return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+    
+@app.route('/login', methods=['GET'])
+def login_get():
+    return jsonify({'message': 'Login route is reachable and GET works.'})
+
 
 @app.route('/dashboard')
 def dashboard():
