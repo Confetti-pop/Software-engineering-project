@@ -18,12 +18,12 @@ users = {
 
 @app.route('/')
 def home():
-    return redirect(url_for('login'))
+    return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return jsonify({'message': 'Login route is reachable and GET works.'})
+        return render_template('login.html')
 
     try:
         data = request.get_json(force=True)
