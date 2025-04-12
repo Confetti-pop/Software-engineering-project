@@ -38,9 +38,9 @@ def login():
     else:
         return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
     
-@app.route('/login', methods=['GET'])
-def login_get():
-    return jsonify({'message': 'Login route is reachable and GET works.'})
+@app.route('/login_test', methods=['GET'])
+def login_test():
+    return jsonify({'message': 'GET route is working from Render!'})
 
 
 @app.route('/dashboard')
