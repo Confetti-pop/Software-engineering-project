@@ -10,25 +10,33 @@ function App() {
     e.preventDefault();
     setError('');
 
+    console.log('Sending:', JSON.stringify({ username, password }));
+  
     try {
       const res = await fetch('https://software-engineering-project-h2hj.onrender.com/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: JSON.stringify({ username, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        }),
         credentials: 'include',
       });
-
+  
       const data = await res.json();
-
+  
       if (res.ok && data.success) {
         setUser({ name: data.name, role: data.role });
       } else {
         setError(data.message || 'Login failed');
       }
     } catch (err) {
+      console.error(err);
       setError('Network error');
     }
-  };
+  };  
 
   const handleLogout = async () => {
     await fetch('https://software-engineering-project-h2hj.onrender.com/logout', {credentials: 'include' });

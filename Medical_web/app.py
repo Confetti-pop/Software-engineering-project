@@ -22,9 +22,13 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    try:
+        data = request.get_json(force=True)
+        username = data.get('username')
+        password = data.get('password')
+    except Exception as e:
+        print("❌ Error parsing JSON:", e)
+        return jsonify({'success': False, 'message': 'Invalid JSON'}), 400
 
     user = users.get(username)
     if user and user['password'] == password:
