@@ -22,8 +22,9 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
 
     user = users.get(username)
     if user and user['password'] == password:

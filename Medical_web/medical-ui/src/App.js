@@ -14,7 +14,7 @@ function App() {
       const res = await fetch('https://software-engineering-project-h2hj.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ username, password }),
+        body: JSON.stringify({ username, password }),
         credentials: 'include',
       });
 
