@@ -20,8 +20,11 @@ users = {
 def home():
     return redirect(url_for('login'))
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'GET':
+        return jsonify({'message': 'Login route is reachable and GET works.'})
+
     try:
         data = request.get_json(force=True)
         username = data.get('username')
@@ -37,10 +40,6 @@ def login():
         return jsonify({'success': True, 'role': user['role'], 'name': user['name']})
     else:
         return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
-    
-@app.route('/login_test', methods=['GET'])
-def login_test():
-    return jsonify({'message': 'GET route is working from Render!'})
 
 
 @app.route('/dashboard')
