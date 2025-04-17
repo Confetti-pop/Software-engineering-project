@@ -12,7 +12,7 @@
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
-        <form method="POST" class="login-form">
+        <form method="POST" action="/login" class="login-form">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
