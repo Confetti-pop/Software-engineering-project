@@ -11,7 +11,8 @@ app.secret_key = 'secretkey123'  # needed for session management
 users = {
     "patient1": {"password": "pass1", "role": "patient", "name": "Alice Smith"},
     "patient2": {"password": "pass2", "role": "patient", "name": "Bob Jones"},
-    "doctor1": {"password": "docpass", "role": "doctor", "name": "Dr. Grey"}
+    "doctor1": {"password": "docpass", "role": "doctor", "name": "Dr. Grey"},
+     "frontdesk1": {"password": "deskpass", "role": "frontdesk", "name": "Receptionist One"}
 }
 
 # --- Simulated patient records and medications ---
@@ -137,6 +138,11 @@ def dashboard():
         doctor = Doctor(user_id)
         records = doctor.view_patient_records()
         return render_template('dashboard_doctor.html', user=user, records=records)
+    
+    if user['role'] == 'frontdesk':
+        doctor = Doctor('doctor1')  # simulate access to patient records
+        records = doctor.view_patient_records()
+        return render_template('dashboard_frontdesk.html', user=user, records=records)
 
     # ✅ If patient
     patient = patient_data.get(user_id)

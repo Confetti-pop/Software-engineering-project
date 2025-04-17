@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FrontDesk Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.name }} (FrontDesk)</h2>
+
+    <h3>📅 Patient Appointments</h3>
+    {% for pid, info in records.items() %}
+        <div style="margin-bottom: 15px;">
+            <strong>{{ info.name }} ({{ pid }})</strong>
+            <ul>
+                {% if info.appointments %}
+                    {% for appt in info.appointments %}
+                        <li>{{ appt }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No appointments scheduled.</li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
