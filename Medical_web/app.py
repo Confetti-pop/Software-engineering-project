@@ -108,12 +108,16 @@ def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    user_id = session['username']
-    user = users[user_id]
-
     try:
+        # Safely retrieve user ID from session
+        user_id = session['username']
+        user = users[user_id]
+
+        # DEBUG print
+        print(f"🔍 Dashboard access by {user_id} with role {user['role']}")
+
         if user['role'] == 'doctor':
-            doctor = user
+            doctor = Doctor(user_id)
 
             if request.method == 'POST':
                 patient_id = request.form.get('patient_id')
@@ -126,12 +130,12 @@ def dashboard():
             return render_template('dashboard_doctor.html', user=user, records=records)
 
         elif user['role'] == 'patient':
-            patient = user
+            patient = Patient(user_id)
             info = patient.view_own_info()
-            return render_template('dashboard_patient.html', user=user, info=info)
+            return render_template('dashboard_patient.html', user=user, user_id=user_id, info=info)
 
         elif user['role'] == 'frontdesk':
-            fd = user
+            fd = FrontDesk(user_id)
 
             if request.method == 'POST':
                 patient_id = request.form.get('patient_id')
@@ -142,13 +146,18 @@ def dashboard():
                 pid: {"name": users[pid]["name"], "appointments": patient_data[pid]["appointments"]}
                 for pid in patient_data
             }
-            return render_template('dashboard_frontdesk.html', user=user, records=records, patient_ids=patient_data.keys())
+            return render_template(
+                'dashboard_frontdesk.html',
+                user=user,
+                records=records,
+                patient_ids=patient_data.keys()
+            )
 
         else:
             return "Invalid role", 403
 
     except Exception as e:
-        print(f"❌ Error in /dashboard for role {user['role']}: {e}")
+        print(f"❌ Error in /dashboard: {e}")
         return "Dashboard failed to load", 500
 
 # FrontDesk dashboard
