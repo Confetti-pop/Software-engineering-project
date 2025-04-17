@@ -6,7 +6,7 @@
 <body>
     <h2>Welcome, {{ user.name }} (FrontDesk)</h2>
 
-    <h3>📅 Patient Appointments</h3>
+    <h3>📅 All Patient Appointments</h3>
     {% for pid, info in records.items() %}
         <div style="margin-bottom: 15px;">
             <strong>{{ info.name }} ({{ pid }})</strong>
@@ -22,7 +22,23 @@
         </div>
     {% endfor %}
 
-    <br>
-    <a href="/logout">Logout</a>
+    <h3>➕ Set New Appointment</h3>
+    <form method="POST">
+        <label for="patient_id">Patient ID:</label>
+        <select name="patient_id" required>
+            {% for pid in patient_ids %}
+                <option value="{{ pid }}">{{ pid }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="appointment">Appointment Date:</label>
+        <input type="text" name="appointment" placeholder="MM/DD/YYYY" required>
+        <br><br>
+
+        <button type="submit">Schedule Appointment</button>
+    </form>
+
+    <br><a href="/logout">Logout</a>
 </body>
 </html>

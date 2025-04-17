@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Report</title>
+</head>
+<body>
+    <h2>📋 Patient Report for {{ patient.name }}</h2>
+
+    <h3>Prescriptions</h3>
+    <ul>
+        {% if data.prescriptions %}
+            {% for med in data.prescriptions %}
+                <li>{{ med }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No prescriptions yet.</li>
+        {% endif %}
+    </ul>
+
+    <h3>Appointments</h3>
+    <ul>
+        {% if data.appointments %}
+            {% for appt in data.appointments %}
+                <li>{{ appt }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No appointments yet.</li>
+        {% endif %}
+    </ul>
+
+    <br><a href="/dashboard">⬅ Back to Dashboard</a>
+</body>
+</html>
