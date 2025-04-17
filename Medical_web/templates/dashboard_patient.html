@@ -4,8 +4,31 @@
     <title>Patient Dashboard</title>
 </head>
 <body>
-    <h2>Welcome, {{ user.name }} (Patient)</h2>
-    <p>This is your dashboard.</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <h2>Welcome, {{ user.name }} ({{ user_id }})</h2>
+
+    <h3>🩺 Prescriptions</h3>
+    <ul>
+        {% if data.prescriptions %}
+            {% for med in data.prescriptions %}
+                <li>{{ med }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No prescriptions yet.</li>
+        {% endif %}
+    </ul>
+
+    <h3>📅 Appointments</h3>
+    <ul>
+        {% if data.appointments %}
+            {% for appt in data.appointments %}
+                <li>{{ appt }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No appointments scheduled.</li>
+        {% endif %}
+    </ul>
+
+    <br>
+    <a href="/logout">Logout</a>
 </body>
 </html>

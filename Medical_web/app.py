@@ -130,14 +130,17 @@ def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    user = users[session['username']]
+    user_id = session['username']
+    user = users[user_id]
 
     if user['role'] == 'doctor':
-        doctor = Doctor(session['username'])
+        doctor = Doctor(user_id)
         records = doctor.view_patient_records()
         return render_template('dashboard_doctor.html', user=user, records=records)
-    
-    return render_template('dashboard.html', user=user)
+
+    # ✅ If patient
+    patient = patient_data.get(user_id)
+    return render_template('dashboard_patient.html', user=user, user_id=user_id, data=patient)
     
 @app.route('/doctor/records')
 def doctor_records():
