@@ -113,7 +113,7 @@ def dashboard():
 
     try:
         if user['role'] == 'doctor':
-            doctor = Doctor(user_id)
+            doctor = user
 
             if request.method == 'POST':
                 patient_id = request.form.get('patient_id')
@@ -126,12 +126,12 @@ def dashboard():
             return render_template('dashboard_doctor.html', user=user, records=records)
 
         elif user['role'] == 'patient':
-            patient = Patient(user_id)
+            patient = user
             info = patient.view_own_info()
             return render_template('dashboard_patient.html', user=user, info=info)
 
         elif user['role'] == 'frontdesk':
-            fd = FrontDesk(user_id)
+            fd = user
 
             if request.method == 'POST':
                 patient_id = request.form.get('patient_id')
