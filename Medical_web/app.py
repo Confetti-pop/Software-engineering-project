@@ -111,19 +111,45 @@ def dashboard():
     user_id = session['username']
     user = users[user_id]
 
-    # Doctor dashboard
-    if user['role'] == 'doctor':
-        doctor = Doctor(user_id)
+    try:
+        if user['role'] == 'doctor':
+            doctor = Doctor(user_id)
 
-        if request.method == 'POST':
-            patient_id = request.form.get('patient_id')
-            if 'prescription' in request.form:
-                doctor.prescribe_medication(patient_id, request.form['prescription'])
-            if 'appointment' in request.form:
-                doctor.schedule_appointment(patient_id, request.form['appointment'])
+            if request.method == 'POST':
+                patient_id = request.form.get('patient_id')
+                if 'prescription' in request.form:
+                    doctor.prescribe_medication(patient_id, request.form['prescription'])
+                if 'appointment' in request.form:
+                    doctor.schedule_appointment(patient_id, request.form['appointment'])
 
-        records = doctor.view_patient_records()
-        return render_template('dashboard_doctor.html', user=user, records=records)
+            records = doctor.view_patient_records()
+            return render_template('dashboard_doctor.html', user=user, records=records)
+
+        elif user['role'] == 'patient':
+            patient = Patient(user_id)
+            info = patient.view_own_info()
+            return render_template('dashboard_patient.html', user=user, info=info)
+
+        elif user['role'] == 'frontdesk':
+            fd = FrontDesk(user_id)
+
+            if request.method == 'POST':
+                patient_id = request.form.get('patient_id')
+                appointment = request.form.get('appointment')
+                fd.schedule_patient_appointment(patient_id, appointment)
+
+            records = {
+                pid: {"name": users[pid]["name"], "appointments": patient_data[pid]["appointments"]}
+                for pid in patient_data
+            }
+            return render_template('dashboard_frontdesk.html', user=user, records=records, patient_ids=patient_data.keys())
+
+        else:
+            return "Invalid role", 403
+
+    except Exception as e:
+        print(f"❌ Error in /dashboard for role {user['role']}: {e}")
+        return "Dashboard failed to load", 500
 
     # FrontDesk dashboard
     if user['role'] == 'frontdesk':
