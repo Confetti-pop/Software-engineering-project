@@ -105,6 +105,7 @@ def login():
 # Main dashboard route with role-based content
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
+    print("✅ Entered /dashboard route")
     if 'username' not in session:
         return redirect(url_for('login'))
 
