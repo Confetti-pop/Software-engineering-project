@@ -133,9 +133,11 @@ def dashboard():
     user = users[session['username']]
 
     if user['role'] == 'doctor':
-        return render_template('dashboard_doctor.html', user=user)
-    else:
-        return render_template('dashboard_patient.html', user=user)
+        doctor = Doctor(session['username'])
+        records = doctor.view_patient_records()
+        return render_template('dashboard_doctor.html', user=user, records=records)
+    
+    return render_template('dashboard.html', user=user)
     
 @app.route('/doctor/records')
 def doctor_records():
@@ -144,7 +146,7 @@ def doctor_records():
 
     doctor = Doctor(session['username'])
     records = doctor.view_patient_records()
-    return render_template('doctor_records.html', records=records)
+    return render_template('dashboard_doctor.html', records=records, user=users[session['username']])
 
 @app.route('/doctor/prescribe', methods=['POST'])
 def prescribe():
