@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medication Inventory</title>
+</head>
+<body>
+    <h2>📦 Medication Inventory</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Medication</th>
+            <th>Quantity</th>
+        </tr>
+        {% for name, qty in meds.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ qty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Update or Add Medication</h3>
+    <form method="POST">
+        <label>Medication Name:</label>
+        <input type="text" name="med_name" required>
+        <br><br>
+        <label>Quantity:</label>
+        <input type="number" name="quantity" min="0" required>
+        <br><br>
+        <button type="submit">Update Inventory</button>
+    </form>
+
+    <br>
+    <a href="/dashboard">⬅ Back to Dashboard</a>
+</body>
+</html>

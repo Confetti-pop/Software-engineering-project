@@ -174,6 +174,20 @@ def set_appointment():
 
     return redirect(url_for('doctor_records'))
 
+@app.route('/doctor/inventory', methods=['GET', 'POST'])
+def inventory():
+    if 'username' not in session or session['role'] != 'doctor':
+        return redirect(url_for('login'))
+
+    doctor = Doctor(session['username'])
+
+    if request.method == 'POST':
+        med_name = request.form['med_name']
+        quantity = int(request.form['quantity'])
+        doctor.update_medication_store(med_name, quantity)
+
+    return render_template('medication_inventory.html', meds=medication_store)
+
 @app.route('/logout')
 def logout():
     session.clear()
