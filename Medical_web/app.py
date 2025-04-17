@@ -14,6 +14,71 @@ users = {
     "doctor1": {"password": "docpass", "role": "doctor", "name": "Dr. Grey"}
 }
 
+# --- Simulated patient records and medications ---
+patient_data = {
+    "patient1": {
+        "name": "Alice Smith",
+        "prescriptions": [],
+        "appointments": []
+    },
+    "patient2": {
+        "name": "Bob Jones",
+        "prescriptions": [],
+        "appointments": []
+    }
+}
+
+medication_store = {
+    "Ibuprofen": 10,
+    "Amoxicillin": 5
+}
+
+# --- Simulated Login Class ---
+class Login:
+    def __init__(self):
+        self.connected = False
+
+    def connectToDatabase(self):
+        print("🔌 Connecting to database (simulated)...")
+        self.connected = True
+
+    def disconnectDatabase(self):
+        print("❌ Disconnecting from database (simulated)...")
+        self.connected = False
+
+    def login(self, username, password):
+        if not self.connected:
+            self.connectToDatabase()
+
+        user = users.get(username)
+        if user and user['password'] == password:
+            print(f"✅ Login successful for {username}")
+            return user
+        else:
+            print(f"❌ Login failed for {username}")
+            return None
+
+# --- Simulated Doctor Class ---
+class Doctor:
+    def __init__(self, name):
+        self.name = name
+
+    def view_patient_records(self):
+        print("📄 Viewing all patient records (simulated)")
+        return patient_data
+
+    def prescribe_rx(self, patient_id, prescription):
+        print(f"💊 Doctor prescribing '{prescription}' to {patient_id}")
+        patient_data[patient_id]['prescriptions'].append(prescription)
+
+    def set_appointment(self, patient_id, date):
+        print(f"📅 Setting appointment for {patient_id} on {date}")
+        patient_data[patient_id]['appointments'].append(date)
+
+    def update_medication_store(self, med_name, quantity):
+        print(f"📦 Updating med store: {med_name} → {quantity}")
+        medication_store[med_name] = quantity
+
 # --- Routes ---
 
 @app.route('/')
@@ -41,7 +106,9 @@ def login():
         password = request.form.get('password')
         print(f"🔐 Form data → Username: {username}, Password: {password}")
 
-    user = users.get(username)
+    login_manager = Login()
+    user = login_manager.login(username, password)
+    login_manager.disconnectDatabase()
     if user and user['password'] == password:
         session['username'] = username
         session['role'] = user['role']
@@ -58,7 +125,6 @@ def login():
         else:
             return render_template('login.html', error='Invalid credentials')
 
-
 @app.route('/dashboard')
 def dashboard():
     if 'username' not in session:
@@ -70,6 +136,41 @@ def dashboard():
         return render_template('dashboard_doctor.html', user=user)
     else:
         return render_template('dashboard_patient.html', user=user)
+    
+@app.route('/doctor/records')
+def doctor_records():
+    if 'username' not in session or session['role'] != 'doctor':
+        return redirect(url_for('login'))
+
+    doctor = Doctor(session['username'])
+    records = doctor.view_patient_records()
+    return render_template('doctor_records.html', records=records)
+
+@app.route('/doctor/prescribe', methods=['POST'])
+def prescribe():
+    if 'username' not in session or session['role'] != 'doctor':
+        return redirect(url_for('login'))
+
+    patient_id = request.form['patient_id']
+    prescription = request.form['prescription']
+
+    doctor = Doctor(session['username'])
+    doctor.prescribe_rx(patient_id, prescription)
+
+    return redirect(url_for('doctor_records'))
+
+@app.route('/doctor/appointment', methods=['POST'])
+def set_appointment():
+    if 'username' not in session or session['role'] != 'doctor':
+        return redirect(url_for('login'))
+
+    patient_id = request.form['patient_id']
+    date = request.form['appointment_date']
+
+    doctor = Doctor(session['username'])
+    doctor.set_appointment(patient_id, date)
+
+    return redirect(url_for('doctor_records'))
 
 @app.route('/logout')
 def logout():

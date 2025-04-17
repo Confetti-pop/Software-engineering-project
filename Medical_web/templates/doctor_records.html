@@ -7,7 +7,7 @@
     <h2>Doctor Dashboard - Patient Records</h2>
 
     {% for patient_id, info in records.items() %}
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
             <h3>{{ info.name }} ({{ patient_id }})</h3>
 
             <strong>Prescriptions:</strong>
@@ -21,15 +21,6 @@
                 {% endif %}
             </ul>
 
-            <form method="POST" action="/doctor/prescribe">
-                <input type="hidden" name="patient_id" value="{{ patient_id }}">
-                <label>New Prescription:</label>
-                <input type="text" name="prescription" required>
-                <button type="submit">Prescribe</button>
-            </form>
-
-            <br>
-
             <strong>Appointments:</strong>
             <ul>
                 {% if info.appointments %}
@@ -40,15 +31,7 @@
                     <li>No appointments yet.</li>
                 {% endif %}
             </ul>
-
-            <form method="POST" action="/doctor/appointment">
-                <input type="hidden" name="patient_id" value="{{ patient_id }}">
-                <label>New Appointment Date:</label>
-                <input type="text" name="appointment_date" placeholder="MM/DD/YYYY" required>
-                <button type="submit">Set Appointment</button>
-            </form>
         </div>
     {% endfor %}
 </body>
 </html>
-
