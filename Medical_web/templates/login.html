@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Medical Portal Login</title>
-    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="login-container">
-        <h2>🔒 Welcome to the Medical Records System</h2>
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        <form method="POST" action="/login" class="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    <div class="login-wrapper">
+        <!-- Left image area -->
+        <div class="login-image-box">
+            <img src="{{ url_for('static', filename='image4.png') }}" alt="Login visual" class="login-image">
+        </div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <!-- Right login form -->
+        <div class="login-form-box">
+            <h2>Welcome to the Medical Records System</h2>
 
-            <button type="submit">Login</button>
-        </form>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST" class="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Sign in</button>
+            </form>
+
+            <!-- Mockup links under form -->
+            <div class="login-links">
+                <a href="#">Forgot Password</a>
+                <a href="#">Forgot Username</a>
+                <a href="#">Sign up</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
-

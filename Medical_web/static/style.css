@@ -112,3 +112,58 @@ button:hover {
 .button-link:hover {
     background-color: #45a049;
 }
+.login-wrapper {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image-box {
+    flex: 1;
+    padding: 20px;
+}
+
+.login-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.login-form-box {
+    flex: 1;
+    padding: 30px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+    display: block;
+    margin-top: 15px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    width: 100%;
+    background-color: #2a7ae2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
