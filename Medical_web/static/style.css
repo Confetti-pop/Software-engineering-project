@@ -1,69 +1,29 @@
-/* Full-page background */
+/* Make background image fill the screen but stay proportional */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: url('../static/image4.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
+    background-image: url("image4.png");
+    background-size: contain;  /* Use contain instead of cover for better fit */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f0f4f8; /* fallback color */
 }
 
-/* Semi-transparent overlay for form */
+/* Optional: remove or tone down overlay if it's too white */
 .overlay {
-    background-color: rgba(255, 255, 255, 0.8);
-    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4); /* Reduce the white overlay */
 }
 
-/* Login form styling */
+/* Make the login box a bit smaller and sharper */
 .login-box {
-    background-color: #ffffff;
-    padding: 40px;
+    background-color: white;
+    padding: 25px 30px;
     border-radius: 10px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
-}
-
-/* Input and button */
-.login-box input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.login-box button {
-    width: 100%;
-    padding: 12px;
-    background-color: #2a72e5;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-box button:hover {
-    background-color: #1c57b5;
-}
-
-/* Link styling */
-.login-links {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.login-links a {
-    margin: 0 10px;
-    font-size: 0.9em;
-    color: #2a72e5;
-    text-decoration: none;
-}
-
-.login-links a:hover {
-    text-decoration: underline;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    max-width: 90%;
 }
