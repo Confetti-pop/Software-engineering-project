@@ -5,7 +5,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Doctor Dashboard - Patient Records</h2>
+    <!-- Inside dashboard_doctor.html and dashboard_frontdesk.html -->
+
+<div class="dashboard-container">
+    <h2>Welcome, {{ user['name'] }}</h2>
+
+    <!-- Button to view analytics dashboard -->
+    <br>
+    <a href="/analytics" class="button-link">📊 View Analytics</a>
+
+    <!-- Other dashboard options like patient management, logout, etc. go below -->
+</div>
 
     {% for patient_id, info in records.items() %}
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">

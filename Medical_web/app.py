@@ -281,6 +281,39 @@ def view_appointment_history():
         appointments=appointments
     )
 
+# Analytics Dashboard Route
+@app.route('/analytics')
+def analytics_dashboard():
+    # Check if user is logged in
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    # Get the current user info
+    user = users[session['username']]
+
+    # Restrict access: only doctor or front desk can view analytics
+    if user['role'] not in ['doctor', 'frontdesk']:
+        return "Access denied", 403
+
+    # Calculate total number of patients in the system
+    total_patients = sum(1 for u in users.values() if u['role'] == 'patient')
+
+    # Calculate total number of appointments (all patients combined)
+    total_appointments = sum(len(u.get('appointments', [])) for u in users.values() if u['role'] == 'patient')
+
+    # Calculate the most prescribed medications
+    medication_counts = {}
+    for patient_id, info in patient_data.items():
+        for med in info.get('prescriptions', []):
+            medication_counts[med] = medication_counts.get(med, 0) + 1
+
+    # Render the analytics dashboard template
+    return render_template(
+        'analytics_dashboard.html',
+        total_patients=total_patients,
+        total_appointments=total_appointments,
+        medication_counts=medication_counts
+    )
 
 # Logout and clear session
 @app.route('/logout')

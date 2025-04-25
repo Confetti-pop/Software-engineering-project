@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics Dashboard</title>
+    <!-- Link to external CSS for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="report-container">
+        <!-- Title of the Analytics Page -->
+        <h2>📊 Analytics Dashboard</h2>
+
+        <!-- Total number of patients -->
+        <p><strong>Total Patients:</strong> {{ total_patients }}</p>
+
+        <!-- Total number of appointments across all patients -->
+        <p><strong>Total Appointments:</strong> {{ total_appointments }}</p>
+
+        <!-- List of most prescribed medications -->
+        <h3>Most Prescribed Medications:</h3>
+        <ul>
+            {% if medication_counts %}
+                {% for medication, count in medication_counts.items() %}
+                    <li>{{ medication }} ({{ count }} times)</li>
+                {% endfor %}
+            {% else %}
+                <!-- Show if no data exists -->
+                <li>No prescriptions yet.</li>
+            {% endif %}
+        </ul>
+
+        <!-- Back to dashboard link -->
+        <br>
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+</body>
+</html>
