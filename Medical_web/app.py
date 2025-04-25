@@ -9,10 +9,28 @@ app.secret_key = 'secretkey123'       # Required for session tracking
 # --- Simulated user database ---
 # username: { password, role, display name }
 users = {
-    "patient1": {"password": "pass1", "role": "patient", "name": "Alice Smith"},
-    "patient2": {"password": "pass2", "role": "patient", "name": "Bob Jones"},
-    "doctor1": {"password": "docpass", "role": "doctor", "name": "Dr. Grey"},
-    "frontdesk1": {"password": "deskpass", "role": "frontdesk", "name": "Receptionist One"}
+    "patient1": {
+        "password": "pass1",
+        "role": "patient",
+        "name": "Alice Smith",
+        "appointments": []
+    },
+    "patient2": {
+        "password": "pass2",
+        "role": "patient",
+        "name": "Bob Jones",
+        "appointments": []
+    },
+    "doctor1": {
+        "password": "docpass",
+        "role": "doctor",
+        "name": "Dr. Grey"
+    },
+    "frontdesk1": {
+        "password": "frontpass",
+        "role": "frontdesk",
+        "name": "Reception Staff"
+    }
 }
 
 # --- Simulated patient medical data ---
