@@ -1,169 +1,72 @@
-body {
+body, html {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f4f8;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 0;
+    height: 100%;
+    background: url('../static/image4.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
 }
 
-.login-container {
-    background: #ffffff;
-    padding: 2rem 3rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 360px;
-}
-
-.login-container h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    color: #2a3d66;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #2a3d66;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 0.6rem;
-    background-color: #2a3d66;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #1d2e4a;
-}
-
-.error {
-    color: #d9534f;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-.print-report-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.print-report-btn:hover {
-    background-color: #45a049;
-}
-/* Style for the Print Button */
-.print-btn {
-    background-color: #007BFF;      /* Primary blue color */
-    color: white;                   /* White text color */
-    border: none;                   /* No border */
-    padding: 0.5rem 1rem;           /* Padding for size */
-    font-size: 1rem;                /* Font size */
-    border-radius: 4px;             /* Rounded corners */
-    cursor: pointer;               /* Pointer cursor on hover */
-    margin-bottom: 1rem;            /* Space below the button */
-}
-
-/* Hover effect for the button */
-.print-btn:hover {
-    background-color: #0056b3;      /* Darker blue on hover */
-}
-/* Button Link Styling: Styles any <a> tag with class "button-link" */
-.button-link {
-    display: inline-block;           /* Makes the link behave like a button */
-    padding: 10px 15px;              /* Padding inside the button */
-    margin-top: 15px;                /* Space above the button */
-    background-color: #4CAF50;       /* Green background color */
-    color: white;                    /* White text color */
-    text-decoration: none;           /* Removes underline */
-    border-radius: 4px;              /* Rounded corners */
-    font-weight: bold;               /* Bold text */
-}
-
-/* Hover Effect: Darken the button color when mouse is over it */
-.button-link:hover {
-    background-color: #45a049;
-}
-.login-wrapper {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-image-box {
-    flex: 1;
-    padding: 20px;
-}
-
-.login-image {
-    width: 400px;
-    border-radius: 8px;
-    margin-right: 30px;
-  }  
-
-.login-form-box {
-    flex: 1;
-    padding: 30px;
-    background-color: #f5f5f5;
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 73%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 25px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-.login-form label {
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.login-box label {
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-.login-form input {
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.login-box button {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-top: 15px;
+    background-color: #1d70b8;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
 }
 
-.login-form button {
-    margin-top: 20px;
-    padding: 10px 15px;
-    width: 100%;
-    background-color: #2a7ae2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.login-box button:hover {
+    background-color: #155a96;
 }
 
 .login-links {
-    margin-top: 15px;
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
+    font-size: 12px;
+}
+
+.login-links a {
+    color: #1d70b8;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
 }
