@@ -6,7 +6,9 @@
 </head>
 <body>
     <h2>Welcome, {{ user.name }} ({{ user_id }})</h2>
-
+    <br><br>
+    <a href="/patient/report" class="print-report-btn">🖨️ View Printable Report</a>
+    
     <h3>🩺 Prescriptions</h3>
     <ul>
         {% if data.prescriptions %}
