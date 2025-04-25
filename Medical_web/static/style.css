@@ -80,3 +80,19 @@ button:hover {
 .print-report-btn:hover {
     background-color: #45a049;
 }
+/* Style for the Print Button */
+.print-btn {
+    background-color: #007BFF;      /* Primary blue color */
+    color: white;                   /* White text color */
+    border: none;                   /* No border */
+    padding: 0.5rem 1rem;           /* Padding for size */
+    font-size: 1rem;                /* Font size */
+    border-radius: 4px;             /* Rounded corners */
+    cursor: pointer;               /* Pointer cursor on hover */
+    margin-bottom: 1rem;            /* Space below the button */
+}
+
+/* Hover effect for the button */
+.print-btn:hover {
+    background-color: #0056b3;      /* Darker blue on hover */
+}
