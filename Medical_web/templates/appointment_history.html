@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment History</title>
+    <!-- Link to shared stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="report-container">
+        <!-- Header showing patient's name -->
+        <h2>📅 Appointment History for {{ patient.name }}</h2>
+
+        <!-- List of appointments -->
+        <ul>
+            {% if appointments %}
+                <!-- Loop through each appointment and display it -->
+                {% for appt in appointments %}
+                    <li>{{ appt }}</li>
+                {% endfor %}
+            {% else %}
+                <!-- Show message if no appointments exist -->
+                <li>No past appointments found.</li>
+            {% endif %}
+        </ul>
+
+        <!-- Navigation back to patient dashboard -->
+        <br>
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

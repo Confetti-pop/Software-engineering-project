@@ -223,8 +223,8 @@ def patient_report():
     if 'username' not in session or session['role'] != 'patient':
         return redirect(url_for('login'))
 
-    patient = Patient(session['username'])
-    data = patient.get_info()
+    patient = Patient(session['username']) # ensure Patient class exists and accepts username
+    data = patient.get_info()              # make sure get_info() method exists
     return render_template('patient_report.html', patient=users[session['username']], data=data)
 
 # Doctor medication inventory page
@@ -241,6 +241,28 @@ def inventory():
         doctor.update_medication_store(med_name, quantity)
 
     return render_template('medication_inventory.html', meds=medication_store)
+
+# View appointment history page
+@app.route('/patient/appointments')
+def view_appointment_history():
+    # Check if user is logged in and is a patient
+    if 'username' not in session or session['role'] != 'patient':
+        return redirect(url_for('login'))
+
+    # Get current user's ID and data
+    user_id = session['username']
+    patient = Patient(user_id)
+
+    # Retrieve the patient's appointments (already stored in users)
+    appointments = users[user_id]['appointments']  # Replace if you store them differently
+
+    # Render the appointment history page and pass in user data
+    return render_template(
+        'appointment_history.html',
+        patient=users[user_id],
+        appointments=appointments
+    )
+
 
 # Logout and clear session
 @app.route('/logout')

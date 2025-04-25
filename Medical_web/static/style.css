@@ -96,3 +96,19 @@ button:hover {
 .print-btn:hover {
     background-color: #0056b3;      /* Darker blue on hover */
 }
+/* Button Link Styling: Styles any <a> tag with class "button-link" */
+.button-link {
+    display: inline-block;           /* Makes the link behave like a button */
+    padding: 10px 15px;              /* Padding inside the button */
+    margin-top: 15px;                /* Space above the button */
+    background-color: #4CAF50;       /* Green background color */
+    color: white;                    /* White text color */
+    text-decoration: none;           /* Removes underline */
+    border-radius: 4px;              /* Rounded corners */
+    font-weight: bold;               /* Bold text */
+}
+
+/* Hover Effect: Darken the button color when mouse is over it */
+.button-link:hover {
+    background-color: #45a049;
+}
