@@ -1,72 +1,62 @@
-body, html {
+/* Make the body full screen with no margin */
+body.login-body {
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+}
+
+/* Container that holds everything */
+.login-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Background image fully fills the screen */
+.login-bg {
+    width: 100%;
     height: 100%;
-    background: url('../static/image4.png') no-repeat center center fixed;
-    background-size: cover;
-    font-family: Arial, sans-serif;
+    object-fit: cover;
 }
 
-.login-box {
+/* Form is absolutely positioned over the image */
+.login-overlay {
     position: absolute;
-    top: 50%;
-    left: 73%;
+    top: 34%;
+    left: 66%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px 25px;
-    border-radius: 10px;
-    width: 280px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.login-box h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
-.login-box label {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.login-box input[type="text"],
-.login-box input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.login-box button {
-    width: 100%;
+/* Input field styling */
+.login-input {
     padding: 10px;
-    margin-top: 15px;
-    background-color: #1d70b8;
+    font-size: 16px;
+    width: 200px;
+}
+
+/* Positioning tweaks if needed */
+.username {
+    margin-top: 0;
+}
+
+.password {
+    margin-top: 5px;
+}
+
+.login-btn {
+    padding: 10px;
+    background-color: #337ab7;
     color: white;
-    font-size: 14px;
     border: none;
     cursor: pointer;
 }
 
-.login-box button:hover {
-    background-color: #155a96;
-}
-
 .login-links {
-    margin-top: 12px;
+    font-size: 12px;
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
-}
-
-.login-links a {
-    color: #1d70b8;
-    text-decoration: none;
-}
-
-.login-links a:hover {
-    text-decoration: underline;
 }
