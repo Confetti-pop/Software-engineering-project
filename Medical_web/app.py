@@ -133,7 +133,7 @@ def dashboard():
         elif user['role'] == 'patient':
             patient = Patient(user_id)
             info = patient.get_info()
-            return render_template('dashboard_patient.html', user=user, user_id=user_id, info=info)
+            return render_template('dashboard_patient.html', user=user, user_id=user_id, data=info)
 
         elif user['role'] == 'frontdesk':
             fd = FrontDesk(user_id)
