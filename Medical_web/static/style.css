@@ -10,20 +10,17 @@ body {
 }
 
 /* Optional: remove or tone down overlay if it's too white */
-.overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: rgba(255, 255, 255, 0.4); /* Reduce the white overlay */
+.container, .overlay {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 /* Make the login box a bit smaller and sharper */
 .login-box {
-    background-color: white;
-    padding: 25px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    width: 320px;
-    max-width: 90%;
+    background-color: transparent;   /* Remove white background */
+    border: none;                    /* Remove any borders */
+    box-shadow: none;                /* Remove any shadows */
+    padding: 0;                      /* Eliminate extra spacing */
 }
+
