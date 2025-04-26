@@ -315,9 +315,14 @@ def analytics_dashboard():
         medication_counts=medication_counts
     )
 # Scheduling appointment
-@app.route('/schedule_appointment')
+@app.route('/schedule_appointment', methods=["POST"])
 def schedule_appointment():
-    return render_template('schedule_appointment.html')
+    doctor_name = request.form.get("doctor_name")
+    specialty = request.form.get("specialty")
+    contact = request.form.get("contact")
+    building = request.form.get("building")
+    address = request.form.get("address")
+    return render_template("confirm_appointment.html", doctor_name=doctor_name, specialty=specialty)
 
 # Confirming appointment
 @app.route('/confirm_appointment')

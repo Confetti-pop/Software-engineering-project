@@ -12,7 +12,7 @@
 
         <div class="confirm-overlay">
             <h1>Confirm Your Appointment</h1>
-            <h2>Doctor: {{ doctor_name }}</h2>
+            <p>You selected {{ doctor_name }} ({{ specialty }})</p>
 
             <form method="POST" action="/appointment_success">
                 <label for="date">Choose Date:</label>
