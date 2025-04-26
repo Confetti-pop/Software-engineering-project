@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Appointment History</title>
+  <title>Doctor Appointments</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
   <div class="dashboard-container">
-    <h1>Your Appointments</h1>
+    <h1>Your Scheduled Appointments</h1>
 
     {% if appointments %}
       <ul class="appointment-list">
         {% for appt in appointments %}
           <li>
-            <strong>Doctor:</strong> {{ appt.doctor }}<br>
+            <strong>Patient:</strong> {{ appt.patient }}<br>
             <strong>Date:</strong> {{ appt.date }}<br>
             <strong>Time:</strong> {{ appt.time }}
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p class="dashboard-subtitle">You have no appointments yet.</p>
+      <p class="dashboard-subtitle">No appointments scheduled yet.</p>
     {% endif %}
 
-    <a href="/dashboard_patient" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+    <a href="/dashboard_doctor" class="dashboard-button" style="margin-top: 20px;">Back to Doctor Dashboard</a>
   </div>
 </body>
 </html>

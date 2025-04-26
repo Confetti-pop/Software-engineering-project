@@ -5,12 +5,12 @@
   <title>Confirm Appointment</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="confirm-page">
-  <div class="confirm-container">
+<body class="dashboard-page">
+  <div class="dashboard-container">
     <h1>Confirm Your Appointment</h1>
-    <p>You selected <strong>{{ doctor_name }}</strong> ({{ specialty }})</p>
+    <p class="dashboard-subtitle">You selected <strong>{{ doctor_name }}</strong> — <em>{{ specialty }}</em></p>
 
-    <form method="POST" action="/appointment_success" class="confirm-form">
+    <form class="confirm-form" method="POST" action="/appointment_success">
       <label for="date">Choose Date:</label>
       <input type="date" id="date" name="date" required>
 
@@ -21,6 +21,9 @@
 
       <button type="submit">Confirm Appointment</button>
     </form>
+
+    <a href="/schedule_appointment" class="dashboard-button" style="margin-top: 20px;">Back to Doctor List</a>
   </div>
 </body>
 </html>
+
