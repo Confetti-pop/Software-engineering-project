@@ -443,7 +443,7 @@ def view_patient_reports():
     return render_template('view_patient_reports.html', patients=patients)
 
 #Editing patient records
-@app.route('/edit_patient_record', methods=['GET', 'POST'])
+@app.route('/edit_patient_records', methods=['GET', 'POST'])
 def edit_patient_record():
     if "username" not in session:
         return redirect("/login")
