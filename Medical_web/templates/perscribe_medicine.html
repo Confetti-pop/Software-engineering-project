@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prescribe Medicine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Prescribe Medicine</h1>
+    <p class="dashboard-subtitle">Fill out the form to prescribe medicine to a patient.</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form class="checkin-form" method="POST" action="/prescribe_medicine">
+      <input type="text" name="patient_name" placeholder="Patient Full Name" required>
+      <input type="text" name="medication_name" placeholder="Medication Name" required>
+      <input type="text" name="dosage" placeholder="Dosage (e.g., 2 tablets daily)" required>
+      <button type="submit">Prescribe</button>
+    </form>
+
+    <a href="/dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+  </div>
+</body>
+</html>

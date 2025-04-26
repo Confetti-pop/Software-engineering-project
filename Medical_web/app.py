@@ -234,6 +234,25 @@ def inventory():
 
     return render_template('medication_inventory.html', meds=medication_store)
 
+# Perscribe
+@app.route('/prescribe_medicine', methods=['GET', 'POST'])
+def prescribe_medicine():
+    if 'username' not in session or session['role'] != 'doctor':
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        patient_name = request.form.get('patient_name')
+        medication_name = request.form.get('medication_name')
+        dosage = request.form.get('dosage')
+
+        # Save or process the prescription (we'll keep it simple for now)
+        flash(f"Successfully prescribed {medication_name} ({dosage}) to {patient_name}!")
+
+        return redirect('/prescribe_medicine')
+
+    return render_template('prescribe_medicine.html')
+
+
 # View appointment history page
 @app.route("/appointment_history")
 def appointment_history():
@@ -466,6 +485,7 @@ def edit_patient_record():
         return render_template('edit_patient_record.html', patient=patient, success=True)
 
     return render_template('edit_patient_record.html', patient=patient)
+
 
 
 # Logout and clear session
