@@ -23,10 +23,25 @@ users = {
         "name": "Bob Jones",
         "appointments": []
     },
-    "doctor1": {
-        "password": "docpass",
+    "drsmith": {
+        "password": "cardio123",
         "role": "doctor",
-        "name": "Dr. Grey"
+        "name": "Dr. Smith"
+    },
+    "drwilliams": {
+        "password": "radio123",
+        "role": "doctor",
+        "name": "Dr. Williams"
+    },
+    "drwilson": {
+        "password": "onco123",
+        "role": "doctor",
+        "name": "Dr. Wilson"
+    },
+    "drjohnson": {
+        "password": "rheuma123",
+        "role": "doctor",
+        "name": "Dr. Johnson"
     },
     "frontdesk1": {
         "password": "frontpass",
@@ -34,6 +49,7 @@ users = {
         "name": "Reception Staff"
     }
 }
+
 
 # --- Simulated patient medical data ---
 # Stored in-memory for this simulation
@@ -123,63 +139,21 @@ def login():
         return render_template('login.html', error='Invalid credentials')
 
 # Main dashboard route with role-based content
-@app.route('/dashboard', methods=['GET', 'POST'])
+@app.route("/dashboard")
 def dashboard():
-    print("✅ Entered /dashboard route")
-    if 'username' not in session:
-        return redirect(url_for('login'))
+    if "username" not in session:
+        return redirect("/login")
+    
+    role = session.get("role")
 
-    try:
-        # Safely retrieve user ID from session
-        user_id = session['username']
-        user = users[user_id]
-
-        # DEBUG print
-        print(f"🔍 Dashboard access by {user_id} with role {user['role']}")
-
-        if user['role'] == 'doctor':
-            doctor = Doctor(user_id)
-
-            if request.method == 'POST':
-                patient_id = request.form.get('patient_id')
-                if 'prescription' in request.form:
-                    doctor.prescribe_medication(patient_id, request.form['prescription'])
-                if 'appointment' in request.form:
-                    doctor.schedule_appointment(patient_id, request.form['appointment'])
-
-            records = doctor.view_patient_records()
-            return render_template('dashboard_doctor.html', user=user, records=records)
-
-        elif user['role'] == 'patient':
-            patient = Patient(user_id)
-            info = patient.get_info()
-            return render_template('dashboard_patient.html', user=user, user_id=user_id, data=info)
-
-        elif user['role'] == 'frontdesk':
-            fd = FrontDesk(user_id)
-
-            if request.method == 'POST':
-                patient_id = request.form.get('patient_id')
-                appointment = request.form.get('appointment')
-                fd.schedule_patient_appointment(patient_id, appointment)
-
-            records = {
-                pid: {"name": users[pid]["name"], "appointments": patient_data[pid]["appointments"]}
-                for pid in patient_data
-            }
-            return render_template(
-                'dashboard_frontdesk.html',
-                user=user,
-                records=records,
-                patient_ids=patient_data.keys()
-            )
-
-        else:
-            return "Invalid role", 403
-
-    except Exception as e:
-        print(f"❌ Error in /dashboard: {e}")
-        return "Dashboard failed to load", 500
+    if role == "patient":
+        return redirect("/dashboard_patient")
+    elif role == "doctor":
+        return redirect("/dashboard_doctor")
+    elif role == "frontdesk":
+        return redirect("/dashboard_frontdesk")
+    else:
+        return redirect("/login")
 
 # FrontDesk dashboard
 @app.route('/dashboard/frontdesk', methods=['GET', 'POST'])
