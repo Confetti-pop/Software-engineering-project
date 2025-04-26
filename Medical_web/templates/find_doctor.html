@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find a Doctor - UHD Medical Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="doctor-directory">
+
+    <!-- Full page background with doctors -->
+    <div class="doctor-background">
+        <img src="{{ url_for('static', filename='image5.png') }}" alt="Doctor Directory Background">
+    </div>
+
+    <!-- Optional: Search form overlaid -->
+    <form class="search-form" method="GET" action="#">
+        <input type="text" placeholder="Search by specialty or doctor name" name="search">
+        <button type="submit">Search</button>
+    </form>
+
+</body>
+</html>
