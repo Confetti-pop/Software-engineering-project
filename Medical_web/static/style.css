@@ -7,8 +7,8 @@ body.blended-login {
 }
 
 .image-container img {
-    width: 97%;
-    height: 97%;
+    width: 100%;
+    height: 90%;
     object-fit: cover;
     display: block;
 }
@@ -17,7 +17,7 @@ body.blended-login {
 .image-overlay-form {
     position: absolute;
     top: 40%; /* adjust based on your image */
-    left: 70%; /* adjust based on your image */
+    left: 80%; /* adjust based on your image */
     transform: translate(-50%, -50%);
     width: 300px;
     display: flex;
