@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prescribe Medicine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Prescribe Medicine</h1>
+    <form method="POST" action="/prescribe_medicine">
+      <input type="text" name="patient_name" placeholder="Patient Name" required>
+      <input type="text" name="medication" placeholder="Medication Name" required>
+      <input type="text" name="dosage" placeholder="Dosage (e.g., 1 tablet daily)" required>
+      <button type="submit">Prescribe</button>
+    </form>
+    <a href="/dashboard_doctor" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+  </div>
+</body>
+</html>
