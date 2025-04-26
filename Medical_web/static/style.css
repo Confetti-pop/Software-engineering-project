@@ -24,7 +24,7 @@ body.blended-login {
   /* Overlay the login form exactly where it appears on the image */
   .image-overlay-form {
     position: absolute;
-    top: 35%; /* tweak to align perfectly */
+    top: 16%; /* tweak to align perfectly */
     left: 72%; /* adjust based on where the fields are in the image */
     transform: translate(-50%, -50%);
     display: flex;
