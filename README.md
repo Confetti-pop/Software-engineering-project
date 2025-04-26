@@ -39,7 +39,7 @@ This is a console-based medical record system designed for a software engineerin
 3. Press Ctrl + F5 or right-click and choose **Run Python File in Terminal**
 4. Log in using:
 
-plaintext
+### Logins
 Username: patient1   | Password: pass1
 Username: patient2   | Password: pass2
 Username: drsmith    | Password: cardio123
