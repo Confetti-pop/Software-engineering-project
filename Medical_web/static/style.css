@@ -8,7 +8,7 @@ body.blended-login {
 
 .image-container img {
     width: 90%;
-    height: 90%;
+    height: 95%;
     object-fit: cover;
     display: block;
 }
@@ -19,7 +19,7 @@ body.blended-login {
     top: 40%; /* adjust based on your image */
     left: 80%; /* adjust based on your image */
     transform: translate(-50%, -50%);
-    width: 700px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
