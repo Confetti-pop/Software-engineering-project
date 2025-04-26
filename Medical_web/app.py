@@ -236,14 +236,9 @@ def patient_dashboard():
     )
 
 # View patient report page
-@app.route('/patient/report')
+@app.route("/patient_report")
 def patient_report():
-    if 'username' not in session or session['role'] != 'patient':
-        return redirect(url_for('login'))
-
-    patient = Patient(session['username']) # ensure Patient class exists and accepts username
-    data = patient.get_info()              # make sure get_info() method exists
-    return render_template('patient_report.html', patient=users[session['username']], data=data)
+    return render_template("patient_report.html")
 
 # Doctor medication inventory page
 @app.route('/doctor/inventory', methods=['GET', 'POST'])
@@ -261,25 +256,9 @@ def inventory():
     return render_template('medication_inventory.html', meds=medication_store)
 
 # View appointment history page
-@app.route('/patient/appointments')
-def view_appointment_history():
-    # Check if user is logged in and is a patient
-    if 'username' not in session or session['role'] != 'patient':
-        return redirect(url_for('login'))
-
-    # Get current user's ID and data
-    user_id = session['username']
-    patient = Patient(user_id)
-
-    # Retrieve the patient's appointments (already stored in users)
-    appointments = users[user_id]['appointments']  # Replace if you store them differently
-
-    # Render the appointment history page and pass in user data
-    return render_template(
-        'appointment_history.html',
-        patient=users[user_id],
-        appointments=appointments
-    )
+@app.route("/appointment_history")
+def appointment_history():
+    return render_template("appointment_history.html")
 
 # Analytics Dashboard Route
 @app.route('/analytics')
@@ -315,15 +294,9 @@ def analytics_dashboard():
         medication_counts=medication_counts
     )
 # Scheduling appointment
-@app.route('/schedule', methods=["POST"])
-def schedule():
-    doctor_name = request.form.get("doctor_name")
-    specialty = request.form.get("specialty")
-    contact = request.form.get("contact")
-    building = request.form.get("building")
-    address = request.form.get("address")
-
-    return render_template("confirm_appointment.html", doctor_name=doctor_name, specialty=specialty)
+@app.route("/schedule_appointment")
+def schedule_appointment():
+    return render_template("schedule_appointment.html")
 
 # Confirming appointment
 @app.route('/confirm_appointment')
@@ -346,8 +319,6 @@ def checkin_success():
 
 # Flash the success message
     flash(f"Patient {patient_name} (Appointment ID: {appointment_id}) checked in successfully!")
-
-    # You could do something with this data here if needed (like save it)
 
     return render_template("checkin_success.html")
 
