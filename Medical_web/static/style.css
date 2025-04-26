@@ -210,3 +210,56 @@ body.blended-login {
 .doctor-select {
   transform: translate(-50%, -50%);
 }
+
+.confirm-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.calendar-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Appointment overlay form */
+.confirm-overlay {
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.confirm-overlay form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.confirm-overlay input,
+.confirm-overlay button {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.confirm-overlay button {
+  background-color: #1e73e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.confirm-overlay button:hover {
+  background-color: #125bb5;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="confirm-page">
+
+    <div class="calendar-background">
+        <img src="{{ url_for('static', filename='image2.png') }}" alt="Confirm Appointment Background">
+
+        <div class="confirm-overlay">
+            <h1>Confirm Your Appointment</h1>
+            <h2>Doctor: {{ doctor_name }}</h2>
+
+            <form method="POST" action="/appointment_success">
+                <label for="date">Choose Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Choose Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <input type="hidden" name="doctor" value="{{ doctor_name }}">
+
+                <button type="submit">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

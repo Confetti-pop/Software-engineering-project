@@ -314,10 +314,23 @@ def analytics_dashboard():
         total_appointments=total_appointments,
         medication_counts=medication_counts
     )
-
+# Scheduling appointment
 @app.route('/schedule_appointment')
 def schedule_appointment():
     return render_template('schedule_appointment.html')
+
+# Confirming appointment
+@app.route('/confirm_appointment')
+def confirm_appointment():
+    doctor_name = request.args.get('doctor', 'Unknown Doctor')
+    return render_template('confirm_appointment.html', doctor_name=doctor_name)
+
+@app.route('/appointment_success', methods=['POST'])
+def appointment_success():
+    doctor = request.form['doctor']
+    date = request.form['date']
+    time = request.form['time']
+    return f"Appointment confirmed with {doctor} on {date} at {time}!"
 
 # Logout and clear session
 @app.route('/logout')

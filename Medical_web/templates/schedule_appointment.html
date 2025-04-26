@@ -24,9 +24,8 @@
 
   <script>
     function selectDoctor(name) {
-      alert("You selected " + name + "!");
-      // Later: Redirect to booking page if you want
-      // window.location.href = "/confirm_appointment?doctor=" + encodeURIComponent(name);
+      // Redirect instead of alert
+      window.location.href = "/confirm_appointment?doctor=" + encodeURIComponent(name);
     }
   </script>
 
