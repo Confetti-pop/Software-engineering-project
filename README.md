@@ -41,11 +41,22 @@ This is a console-based medical record system designed for a software engineerin
 
 🔑 Logins
 
-Role	Username	Password
-Patient	patient1	pass1
-Patient	patient2	pass2
-Doctor	drsmith	cardio123
-Doctor	drwilliams	radio123
-Doctor	drwilson	onco123
-Doctor	drjohnson	rheuma123
-Front Desk	frontdesk1	frontpass
+Patients:
+
+Username: patient1 | Password: pass1
+
+Username: patient2 | Password: pass2
+
+Doctors:
+
+Username: drsmith | Password: cardio123
+
+Username: drwilliams | Password: radio123
+
+Username: drwilson | Password: onco123
+
+Username: drjohnson | Password: rheuma123
+
+Front Desk:
+
+Username: frontdesk1 | Password: frontpass
