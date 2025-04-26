@@ -368,6 +368,10 @@ def appointment_success():
     flash(f"Appointment with {doctor} confirmed for {date} at {time}.")
     return render_template("appointment_success.html", doctor=doctor, date=date, time=time)
 
+# Check in
+@app.route("/patient_checkin")
+def patient_checkin():
+    return render_template("patient_checkin.html")
 
 @app.route("/checkin_success", methods=["POST"])
 def checkin_success():
@@ -416,6 +420,8 @@ def cancel_appointment(appointment_id):
     else:
         flash("Access denied. Please log in as Front Desk.")
         return redirect("/login")
+    
+# Medical records
 @app.route('/view_medical_record')
 def view_medical_record():
     if "username" not in session:
