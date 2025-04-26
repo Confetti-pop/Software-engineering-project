@@ -330,10 +330,9 @@ def checkin_success():
 @app.route("/view_appointments")
 def view_appointments():
     if "username" in session and session.get("role") == "doctor":
-        doctor_name = session["username"]
+        doctor_name = users[session["username"]]["name"]  # This gets "Dr. Smith"
         doctor_appointments = [appt for appt in appointments if appt["doctor"] == doctor_name]
 
-        # Sort by date and time
         doctor_appointments.sort(key=lambda appt: (appt["date"], appt["time"]))
 
         return render_template("view_appointments.html", appointments=doctor_appointments)
