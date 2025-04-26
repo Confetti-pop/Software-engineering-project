@@ -2,32 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schedule an Appointment</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="schedule-page">
-
-  <div class="page-header">
+<body>
+  <div class="appointment-container">
     <h1>Schedule an Appointment</h1>
     <p>Select a doctor to schedule your appointment.</p>
+    <div class="doctor-list">
+      {% for doctor in doctors %}
+        <form action="/schedule" method="POST" class="doctor-card">
+          <input type="hidden" name="doctor_name" value="{{ doctor.name }}">
+          <input type="hidden" name="specialty" value="{{ doctor.specialty }}">
+          <input type="hidden" name="contact" value="{{ doctor.contact }}">
+          <input type="hidden" name="building" value="{{ doctor.building }}">
+          <input type="hidden" name="address" value="{{ doctor.address }}">
+          <button type="submit">
+            <img src="{{ url_for('static', filename=doctor.image) }}" alt="{{ doctor.name }}" class="doctor-image">
+            <div class="doctor-info">
+              <h3>{{ doctor.name }}</h3>
+              <p>{{ doctor.specialty }}</p>
+              <p>Contact: {{ doctor.contact }}</p>
+              <p>Building: {{ doctor.building }}</p>
+              <p><a href="https://maps.google.com/?q={{ doctor.address }}" target="_blank">{{ doctor.address }}</a></p>
+            </div>
+          </button>
+        </form>
+      {% endfor %}
+    </div>
   </div>
-
-  <div class="doctor-background">
-    <img src="{{ url_for('static', filename='image5.png') }}" alt="Doctor Directory Background">
-
-    <!-- Clickable doctors -->
-    <div class="doctor-select doctor-wilson" onclick="selectDoctor('Dr. Wilson')"></div>
-    <div class="doctor-select doctor-johnson" onclick="selectDoctor('Dr. Johnson')"></div>
-    <div class="doctor-select doctor-patel" onclick="selectDoctor('Dr. Patel')"></div>
-    <div class="doctor-select doctor-chen" onclick="selectDoctor('Dr. Chen')"></div>
-  </div>
-
-  <script>
-    function selectDoctor(name) {
-      // Redirect instead of alert
-      window.location.href = "/confirm_appointment?doctor=" + encodeURIComponent(name);
-    }
-  </script>
-
 </body>
 </html>

@@ -91,17 +91,52 @@ body.blended-login {
     color: #333;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   }
-
-  /* Doctor Page Styles */
-  .doctor-directory {
-    margin: 0;
+  
+/* Doctor Page Styles */
+  .doctor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .doctor-card {
+    border: none;
     padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    position: relative;
-    background-color: #f0f4f8;
-}
+    background: none;
+    width: 100%;
+  }
+  
+  .doctor-card button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    transition: background-color 0.3s;
+  }
+  
+  .doctor-card button:hover {
+    background-color: #e0f7fa;
+  }
+  
+  .doctor-image {
+    width: 90px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 1rem;
+  }
+  
+  .doctor-info h3,
+  .doctor-info p,
+  .doctor-info a {
+    margin: 0;
+    padding: 2px 0;
+  }
+  
 
 .doctor-background img {
     width: 99%;
