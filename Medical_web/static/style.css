@@ -344,3 +344,18 @@ p {
 .cancel-button:hover {
   background-color: #c62828;
 }
+
+/* medical records */
+.container {
+  padding: 2rem;
+}
+
+.container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.container li {
+  margin-bottom: 10px;
+  font-size: 18px;
+}

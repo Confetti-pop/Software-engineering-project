@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Record</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Medical Record for {{ record.name }}</h1>
+
+        <ul>
+            <li><strong>Date of Birth:</strong> {{ record.dob }}</li>
+            <li><strong>Blood Type:</strong> {{ record.blood_type }}</li>
+            <li><strong>Allergies:</strong> {{ record.allergies }}</li>
+            <li><strong>Medical Conditions:</strong> {{ record.medical_conditions }}</li>
+            <li><strong>Current Medications:</strong> {{ record.current_medications }}</li>
+            <li><strong>Last Visit:</strong> {{ record.last_visit }}</li>
+        </ul>
+
+        <a href="/dashboard_patient" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

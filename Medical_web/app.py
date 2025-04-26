@@ -134,6 +134,7 @@ def login():
     if user and user['password'] == password:
         session['username'] = username
         session['role'] = user['role']
+        session['name'] = user['name']   # 👉 ADD THIS LINE
         return redirect(url_for('dashboard'))
     else:
         return render_template('login.html', error='Invalid credentials')
@@ -143,7 +144,7 @@ def login():
 def dashboard():
     if "username" not in session:
         return redirect("/login")
-    
+
     role = session.get("role")
 
     if role == "patient":
@@ -158,17 +159,28 @@ def dashboard():
 # Patient dashboard
 @app.route("/dashboard_patient")
 def dashboard_patient():
-    return render_template("dashboard_patient.html", username=session.get("username"))
+    if "username" not in session:
+        return redirect("/login")
+
+    name = session.get("name")
+    return render_template("dashboard_patient.html", name=name)
+
 
 # Doctor dashboard
 @app.route("/dashboard_doctor")
 def dashboard_doctor():
-    return render_template("dashboard_doctor.html", username=session.get("username"))
+    if "username" not in session:
+        return redirect("/login")
+    name = session.get("name")
+    return render_template("dashboard_doctor.html", name=name)
 
 # Frontdesk dashboard
 @app.route("/dashboard_frontdesk")
 def dashboard_frontdesk():
-    return render_template("dashboard_frontdesk.html", username=session.get("username"))
+    if "username" not in session:
+        return redirect("/login")
+    name = session.get("name")
+    return render_template("dashboard_frontdesk.html", name=name)
 
 # View patient report page
 @app.route("/patient_report")
@@ -362,6 +374,23 @@ def cancel_appointment(appointment_id):
     else:
         flash("Access denied. Please log in as Front Desk.")
         return redirect("/login")
+@app.route('/view_medical_record')
+def view_medical_record():
+    if "username" not in session:
+        return redirect("/login")
+    
+    # Fake patient record info
+    record = {
+        "name": session.get('name'),
+        "dob": "01/15/1995",
+        "blood_type": "O+",
+        "allergies": "Peanuts, Penicillin",
+        "medical_conditions": "Asthma",
+        "current_medications": "Albuterol Inhaler",
+        "last_visit": "04/10/2025"
+    }
+
+    return render_template('view_medical_record.html', record=record)
 
     
 # Logout and clear session
