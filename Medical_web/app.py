@@ -339,6 +339,23 @@ def schedule_appointment():
     ]
     return render_template("schedule_appointment.html", doctors=doctors)
 
+@app.route("/schedule", methods=["POST"])
+def schedule():
+    doctor_name = request.form.get("doctor_name")
+    specialty = request.form.get("specialty")
+    contact = request.form.get("contact")
+    building = request.form.get("building")
+    address = request.form.get("address")
+
+    return render_template(
+        "confirm_appointment.html",
+        doctor_name=doctor_name,
+        specialty=specialty,
+        contact=contact,
+        building=building,
+        address=address
+    )
+
 # Confirming appointment
 @app.route('/confirm_appointment')
 def confirm_appointment():
