@@ -155,61 +155,20 @@ def dashboard():
     else:
         return redirect("/login")
 
-# FrontDesk dashboard
-@app.route('/dashboard/frontdesk', methods=['GET', 'POST'])
-def frontdesk_dashboard():
-    # Retrieve the logged-in user's ID from the session
-    user_id = session.get('username')  # the username is stored in session
-    user = users.get(user_id)          # get full user object/dictionary from users
-
-    # Make sure the user exists and is a front desk
-    if not user or user['role'] != 'frontdesk':
-        return redirect(url_for('login'))  # redirect to login if unauthorized
-
-    frontdesk = FrontDesk()
-
-    # If an appointment is being set via form submission
-    if request.method == 'POST':
-        patient_id = request.form.get('patient_id')
-        appt_date = request.form.get('appointment')
-        frontdesk.set_appointment(patient_id, appt_date)
-
-    # Prepare the records to show patient info
-    records = {
-        pid: {
-            "name": users[pid]["name"],
-            "appointments": patient_data[pid]["appointments"]
-        }
-        for pid in patient_data
-    }
-
-    return render_template(
-        'dashboard_frontdesk.html',
-        user=user,
-        records=records,
-        patient_ids=patient_data.keys()
-    )
-
 # Patient dashboard
-@app.route('/dashboard/patient')
-def patient_dashboard():
-    # Get the currently logged-in user's ID
-    user_id = session.get('username')  # from session during login
-    user = users.get(user_id)          # fetch user data from users dictionary
+@app.route("/dashboard_patient")
+def dashboard_patient():
+    return render_template("dashboard_patient.html", username=session.get("username"))
 
-    # If user is not found or is not a patient, redirect to login
-    if not user or user['role'] != 'patient':
-        return redirect(url_for('login'))
+# Doctor dashboard
+@app.route("/dashboard_doctor")
+def dashboard_doctor():
+    return render_template("dashboard_doctor.html", username=session.get("username"))
 
-    # Create a dummy Patient object (only if needed for get_info())
-    patient = Patient(user_id)
-
-    return render_template(
-        'dashboard_patient.html',
-        user=user,
-        user_id=user_id,
-        data=patient.get_info()
-    )
+# Frontdesk dashboard
+@app.route("/dashboard_frontdesk")
+def dashboard_frontdesk():
+    return render_template("dashboard_frontdesk.html", username=session.get("username"))
 
 # View patient report page
 @app.route("/patient_report")
