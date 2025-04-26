@@ -8,15 +8,27 @@
 <body class="schedule-page">
 
   <div class="page-header">
-      <h1>Schedule an Appointment</h1>
-      <p>Select a doctor to schedule your appointment.</p>
+    <h1>Schedule an Appointment</h1>
+    <p>Select a doctor to schedule your appointment.</p>
   </div>
 
   <div class="doctor-background">
-      <img src="{{ url_for('static', filename='image5.png') }}" alt="Doctor Directory Background">
+    <img src="{{ url_for('static', filename='image5.png') }}" alt="Doctor Directory Background">
+
+    <!-- Clickable doctors -->
+    <div class="doctor-select doctor-wilson" onclick="selectDoctor('Dr. Wilson')"></div>
+    <div class="doctor-select doctor-johnson" onclick="selectDoctor('Dr. Johnson')"></div>
+    <div class="doctor-select doctor-patel" onclick="selectDoctor('Dr. Patel')"></div>
+    <div class="doctor-select doctor-chen" onclick="selectDoctor('Dr. Chen')"></div>
   </div>
 
-  <!-- (Later, you can add clickable doctors if you want) -->
+  <script>
+    function selectDoctor(name) {
+      alert("You selected " + name + "!");
+      // Later: Redirect to booking page if you want
+      // window.location.href = "/confirm_appointment?doctor=" + encodeURIComponent(name);
+    }
+  </script>
 
 </body>
 </html>
