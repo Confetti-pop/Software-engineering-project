@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Front Desk Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Front Desk Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
     <h1>Welcome, {{ name }}!</h1>
-    <p class="dashboard-subtitle">Manage appointments, check-ins, and records below.</p>
+    <p class="dashboard-subtitle">Manage appointments, check-ins, and patient information below.</p>
 
     <div class="dashboard-actions">
-      <a href="/view_all_appointments" class="dashboard-button">View All Appointments</a>
-      <a href="/schedule_appointment" class="dashboard-button">Schedule New Appointment</a>
-      <a href="/patient_checkin" class="dashboard-button">Patient Check-In</a>
-      <a href="/logout" class="dashboard-button logout">Logout</a>
+        <a href="/view_all_appointments" class="dashboard-button">View All Appointments</a>
+        <a href="/schedule_appointment" class="dashboard-button">Schedule New Appointment</a>
+        <a href="/patient_checkin" class="dashboard-button">Patient Check-In</a>
+        <a href="/logout" class="dashboard-button logout">Logout</a>
     </div>
-  </div>
+
+    <h2>Patient Personal Information</h2>
+    <ul>
+        {% for patient in patients %}
+        <li>
+            <strong>Patient ID:</strong> {{ patient.patient_id }} <br>
+            <strong>Name:</strong> {{ patient.name }} <br>
+            <strong>Phone Number:</strong> {{ patient.phone }} <br>
+            <strong>Address:</strong> {{ patient.address }} <br>
+            <strong>Next Appointment:</strong> {{ patient.next_appointment }}
+        </li>
+        <hr>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 </html>
 

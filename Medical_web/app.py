@@ -175,12 +175,30 @@ def dashboard_doctor():
     return render_template("dashboard_doctor.html", name=name)
 
 # Frontdesk dashboard
-@app.route("/dashboard_frontdesk")
+@app.route('/dashboard_frontdesk')
 def dashboard_frontdesk():
     if "username" not in session:
         return redirect("/login")
-    name = session.get("name")
-    return render_template("dashboard_frontdesk.html", name=name)
+
+    # Example limited patient information for front desk
+    patients = [
+        {
+            "patient_id": "P001",
+            "name": "Alice Smith",
+            "phone": "832-555-1234",
+            "address": "123 Main St, Houston, TX 77001",
+            "next_appointment": "05/02/2025 at 10:00 AM"
+        },
+        {
+            "patient_id": "P002",
+            "name": "Bob Jones",
+            "phone": "832-555-5678",
+            "address": "456 Elm St, Houston, TX 77002",
+            "next_appointment": "05/03/2025 at 2:00 PM"
+        }
+    ]
+
+    return render_template('dashboard_frontdesk.html', patients=patients)
 
 # View patient report page
 @app.route("/patient_report")
