@@ -1,4 +1,4 @@
-# Software-engineering-project
+🏥 # Software-engineering-project
 # 🏥 Medical Record System – Software Engineering Project
 
 This is a console-based medical record system designed for a software engineering course project. It simulates real-world functionality for **patients and doctors**, including login authentication, treatment plans, appointments, and medical history.
@@ -8,7 +8,7 @@ This is a console-based medical record system designed for a software engineerin
 ## 🔐 Features
 
 ### ✅ Login System
-- Supports two user roles: `Doctor` and `Patient`
+- Supports two user roles: Doctor and Patient
 - Username/password login (predefined accounts)
 
 ### 👨‍⚕️ Doctor Dashboard
@@ -35,11 +35,15 @@ This is a console-based medical record system designed for a software engineerin
 
 ### Run the Program
 1. Open the project in **Visual Studio Code**
-2. Open `medical_system.py`
-3. Press `Ctrl + F5` or right-click and choose **Run Python File in Terminal**
+2. Open medical_system.py
+3. Press Ctrl + F5 or right-click and choose **Run Python File in Terminal**
 4. Log in using:
 
-```plaintext
+plaintext
 Username: patient1   | Password: pass1
 Username: patient2   | Password: pass2
-Username: doctor1    | Password: docpass
+Username: drsmith    | Password: cardio123
+Username: drwilliams | Password: radio123
+Username: drwilson   | Password: onco123
+Username: drjohnson  | Password: rheuma123
+Username: frontdesk1 | Password: frontpass
