@@ -6,11 +6,17 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="image-container">
-    <!-- Fullscreen Background Image -->
-    <img src="{{ url_for('static', filename='image4.png') }}" alt="Login visual">
 
-    <!-- Overlay Login Form -->
+  <!-- Full image background -->
+  <div class="image-container">
+    <img src="{{ url_for('static', filename='image4.png') }}" alt="Login Background">
+    
+    <!-- Welcome title -->
+    <div class="top-banner">
+      University of Houston Downtown Medical Center
+    </div>
+
+    <!-- Login form overlay -->
     <form class="image-overlay-form" method="POST" action="{{ url_for('login') }}">
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
@@ -22,6 +28,12 @@
         <a href="#">Sign up</a>
       </div>
     </form>
+
+    <!-- Bottom prompt text -->
+    <div class="bottom-banner">
+      Sign in or make an account to view your medical records
+    </div>
   </div>
+
 </body>
 </html>
