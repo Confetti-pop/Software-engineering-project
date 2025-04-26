@@ -238,7 +238,14 @@ def patient_dashboard():
 # View patient report page
 @app.route("/patient_report")
 def patient_report():
-    return render_template("patient_report.html")
+    if "username" in session and session.get("role") == "patient":
+        patient = {
+            "name": session["username"]
+        }
+        return render_template("patient_report.html", patient=patient)
+    else:
+        flash("Access denied. Please log in as a patient.")
+        return redirect("/login")
 
 # Doctor medication inventory page
 @app.route('/doctor/inventory', methods=['GET', 'POST'])
