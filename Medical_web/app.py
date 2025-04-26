@@ -442,6 +442,32 @@ def view_patient_reports():
 
     return render_template('view_patient_reports.html', patients=patients)
 
+#Editing patient records
+@app.route('/edit_patient_record', methods=['GET', 'POST'])
+def edit_patient_record():
+    if "username" not in session:
+        return redirect("/login")
+
+    # Example: existing patient data
+    patient = {
+        "name": "Alice Smith",
+        "dob": "03/12/1995",
+        "medical_conditions": "Asthma",
+        "medications": "Albuterol Inhaler, Fluticasone",
+        "treatment_plan": "Continue inhaler twice daily."
+    }
+
+    if request.method == 'POST':
+        # In real project, you'd update the database here!
+        patient['medical_conditions'] = request.form['medical_conditions']
+        patient['medications'] = request.form['medications']
+        patient['treatment_plan'] = request.form['treatment_plan']
+        # After saving, you can redirect back to dashboard or show success message
+        return render_template('edit_patient_record.html', patient=patient, success=True)
+
+    return render_template('edit_patient_record.html', patient=patient)
+
+
 # Logout and clear session
 @app.route('/logout')
 def logout():

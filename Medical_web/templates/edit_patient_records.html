@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Patient Record</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dashboard-page">
+<div class="dashboard-container">
+    <h1>Edit Patient Record for {{ patient.name }}</h1>
+
+    {% if success %}
+    <p style="color: green;">Record updated successfully!</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Medical Conditions:</label><br>
+        <textarea name="medical_conditions" rows="3" cols="50">{{ patient.medical_conditions }}</textarea><br><br>
+
+        <label>Medications:</label><br>
+        <textarea name="medications" rows="3" cols="50">{{ patient.medications }}</textarea><br><br>
+
+        <label>Treatment Plan:</label><br>
+        <textarea name="treatment_plan" rows="3" cols="50">{{ patient.treatment_plan }}</textarea><br><br>
+
+        <button type="submit" class="dashboard-button">Save Changes</button>
+    </form>
+
+    <br>
+    <a href="/dashboard_doctor" class="dashboard-button logout">Back to Dashboard</a>
+</div>
+</body>
+</html>
