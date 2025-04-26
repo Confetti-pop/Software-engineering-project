@@ -399,7 +399,31 @@ def view_medical_record():
 
     return render_template('view_medical_record.html', record=record)
 
-    
+# Patient reports
+@app.route('/view_patient_reports')
+def view_patient_reports():
+    if "username" not in session:
+        return redirect("/login")
+
+    patients = [
+        {
+            "name": "Alice Smith",
+            "dob": "03/12/1995",
+            "last_visit": "04/15/2025",
+            "medical_conditions": "Asthma",
+            "prescriptions": ["Albuterol Inhaler", "Fluticasone"]
+        },
+        {
+            "name": "Bob Jones",
+            "dob": "07/22/1992",
+            "last_visit": "03/30/2025",
+            "medical_conditions": "Hypertension",
+            "prescriptions": ["Lisinopril", "Hydrochlorothiazide"]
+        }
+    ]
+
+    return render_template('view_patient_reports.html', patients=patients)
+
 # Logout and clear session
 @app.route('/logout')
 def logout():

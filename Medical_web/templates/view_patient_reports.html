@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Reports</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Reports</h1>
+
+        <ul>
+            {% for patient in patients %}
+            <li>
+                <strong>Name:</strong> {{ patient.name }} <br>
+                <strong>DOB:</strong> {{ patient.dob }} <br>
+                <strong>Last Visit:</strong> {{ patient.last_visit }} <br>
+                <strong>Medical Conditions:</strong> {{ patient.medical_conditions }} <br>
+                <strong>Prescriptions:</strong>
+                <ul>
+                    {% for prescription in patient.prescriptions %}
+                        <li>{{ prescription }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <hr>
+            {% endfor %}
+        </ul>
+
+        <a href="/dashboard_doctor" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>
+
