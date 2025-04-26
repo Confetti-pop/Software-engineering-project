@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Confirmed</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <h1>Appointment Confirmed!</h1>
+    <p class="dashboard-subtitle">
+      You have an appointment with <strong>{{ doctor }}</strong> on <strong>{{ date }}</strong> at <strong>{{ time }}</strong>.
+    </p>
+
+    <a href="/dashboard_patient" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+  </div>
+</body>
+</html>
