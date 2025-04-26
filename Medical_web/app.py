@@ -185,14 +185,21 @@ def dashboard_frontdesk():
 # View patient report page
 @app.route("/patient_report")
 def patient_report():
-    if "username" in session and session.get("role") == "patient":
-        patient = {
-            "name": session["username"]
-        }
-        return render_template("patient_report.html", patient=patient)
-    else:
-        flash("Access denied. Please log in as a patient.")
+    if "username" not in session:
         return redirect("/login")
+    
+    # Example fake patient data
+    patient = {
+        "name": session.get('name'),
+        "dob": "01/15/1995",
+        "blood_type": "O+",
+        "allergies": "Peanuts",
+        "prescriptions": ["Albuterol Inhaler", "Ibuprofen"],
+        "last_visit": "04/10/2025"
+    }
+    
+    return render_template("patient_report.html", data=patient)
+
 
 # Doctor medication inventory page
 @app.route('/doctor/inventory', methods=['GET', 'POST'])
