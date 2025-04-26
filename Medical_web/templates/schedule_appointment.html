@@ -7,10 +7,6 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="schedule-page">
-  <div class="doctor-background">
-    <img src="{{ url_for('static', filename='image5.png') }}" alt="Doctors">
-  </div>
-
   <div class="appointment-container">
     <h1>Schedule an Appointment</h1>
     <p>Select a doctor to schedule your appointment.</p>
@@ -27,6 +23,9 @@
             <div class="doctor-info">
               <h3>{{ doctor.name }}</h3>
               <p>{{ doctor.specialty }}</p>
+              <p>Contact: {{ doctor.contact }}</p>
+              <p>Building: {{ doctor.building }}</p>
+              <p><a href="https://maps.google.com/?q={{ doctor.address }}" target="_blank">{{ doctor.address }}</a></p>
             </div>
           </button>
         </form>

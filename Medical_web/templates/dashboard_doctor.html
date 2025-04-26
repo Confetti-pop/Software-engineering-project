@@ -1,65 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <!-- Inside dashboard_doctor.html and dashboard_frontdesk.html -->
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Welcome, Dr. {{ username }}</h1>
+    <p class="dashboard-subtitle">Manage your appointments, reports, and analytics below.</p>
 
-<div class="dashboard-container">
-    <h2>Welcome, {{ user['name'] }}</h2>
-
-    <!-- Button to view analytics dashboard -->
-    <br>
-    <a href="/analytics" class="button-link">📊 View Analytics</a>
-
-    <!-- Other dashboard options like patient management, logout, etc. go below -->
-</div>
-
-    {% for patient_id, info in records.items() %}
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <h3>{{ info.name }} ({{ patient_id }})</h3>
-
-            <strong>Prescriptions:</strong>
-            <ul>
-                {% if info.prescriptions %}
-                    {% for p in info.prescriptions %}
-                        <li>{{ p }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No prescriptions yet.</li>
-                {% endif %}
-            </ul>
-
-            <form method="POST" action="/doctor/prescribe">
-                <input type="hidden" name="patient_id" value="{{ patient_id }}">
-                <label>New Prescription:</label>
-                <input type="text" name="prescription" required>
-                <button type="submit">Prescribe</button>
-            </form>
-
-            <br>
-
-            <strong>Appointments:</strong>
-            <ul>
-                {% if info.appointments %}
-                    {% for a in info.appointments %}
-                        <li>{{ a }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No appointments yet.</li>
-                {% endif %}
-            </ul>
-
-            <form method="POST" action="/doctor/appointment">
-                <input type="hidden" name="patient_id" value="{{ patient_id }}">
-                <label>New Appointment Date:</label>
-                <input type="text" name="appointment_date" placeholder="MM/DD/YYYY" required>
-                <button type="submit">Set Appointment</button>
-            </form>
-        </div>
-    {% endfor %}
+    <div class="dashboard-actions">
+      <a href="/view_appointments" class="dashboard-button">View Scheduled Appointments</a>
+      <a href="/view_patient_reports" class="dashboard-button">View Patient Reports</a>
+      <a href="/view_analytics" class="dashboard-button">View Analytics</a>
+      <a href="/logout" class="dashboard-button logout">Logout</a>
+    </div>
+  </div>
 </body>
 </html>
-

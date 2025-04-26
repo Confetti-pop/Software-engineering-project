@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for, jsonify
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify, flash
 from flask_cors import CORS
 
 # Initialize the Flask app
@@ -337,6 +337,19 @@ def appointment_success():
     date = request.form['date']
     time = request.form['time']
     return f"Appointment confirmed with {doctor} on {date} at {time}!"
+
+@app.route("/checkin_success", methods=["POST"])
+def checkin_success():
+    # You can optionally grab submitted form data if you want:
+    patient_name = request.form.get("patient_name")
+    appointment_id = request.form.get("appointment_id")
+
+# Flash the success message
+    flash(f"Patient {patient_name} (Appointment ID: {appointment_id}) checked in successfully!")
+
+    # You could do something with this data here if needed (like save it)
+
+    return render_template("checkin_success.html")
 
 # Logout and clear session
 @app.route('/logout')

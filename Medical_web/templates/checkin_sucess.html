@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check-In Success</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <h1>Check-In Successful!</h1>
+    <p class="dashboard-subtitle">The patient has been successfully checked in.</p>
+
+    <a href="/frontdesk_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Front Desk Dashboard</a>
+  </div>
+</body>
+</html>

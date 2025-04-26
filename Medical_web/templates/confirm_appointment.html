@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Confirm Appointment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Confirm Appointment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="confirm-page">
+  <div class="confirm-container">
+    <h1>Confirm Your Appointment</h1>
+    <p>You selected <strong>{{ doctor_name }}</strong> ({{ specialty }})</p>
 
-    <div class="calendar-background">
-        <img src="{{ url_for('static', filename='image2.png') }}" alt="Confirm Appointment Background">
+    <form method="POST" action="/appointment_success" class="confirm-form">
+      <label for="date">Choose Date:</label>
+      <input type="date" id="date" name="date" required>
 
-        <div class="confirm-overlay">
-            <h1>Confirm Your Appointment</h1>
-            <p>You selected {{ doctor_name }} ({{ specialty }})</p>
+      <label for="time">Choose Time:</label>
+      <input type="time" id="time" name="time" required>
 
-            <form method="POST" action="/appointment_success">
-                <label for="date">Choose Date:</label>
-                <input type="date" id="date" name="date" required>
+      <input type="hidden" name="doctor" value="{{ doctor_name }}">
 
-                <label for="time">Choose Time:</label>
-                <input type="time" id="time" name="time" required>
-
-                <input type="hidden" name="doctor" value="{{ doctor_name }}">
-
-                <button type="submit">Confirm Appointment</button>
-            </form>
-        </div>
-    </div>
-
+      <button type="submit">Confirm Appointment</button>
+    </form>
+  </div>
 </body>
 </html>

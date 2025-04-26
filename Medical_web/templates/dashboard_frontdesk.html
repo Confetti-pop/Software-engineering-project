@@ -1,45 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>FrontDesk Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Front Desk Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <h2>Welcome, {{ user.name }} (FrontDesk)</h2>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Welcome, {{ username }}</h1>
+    <p class="dashboard-subtitle">Manage appointments, check-ins, and records below.</p>
 
-    <h3>📅 All Patient Appointments</h3>
-    {% for pid, info in records.items() %}
-        <div style="margin-bottom: 15px;">
-            <strong>{{ info.name }} ({{ pid }})</strong>
-            <ul>
-                {% if info.appointments %}
-                    {% for appt in info.appointments %}
-                        <li>{{ appt }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No appointments scheduled.</li>
-                {% endif %}
-            </ul>
-        </div>
-    {% endfor %}
-
-    <h3>➕ Set New Appointment</h3>
-    <form method="POST">
-        <label for="patient_id">Patient ID:</label>
-        <select name="patient_id" required>
-            {% for pid in patient_ids %}
-                <option value="{{ pid }}">{{ pid }}</option>
-            {% endfor %}
-        </select>
-        <br><br>
-
-        <label for="appointment">Appointment Date:</label>
-        <input type="text" name="appointment" placeholder="MM/DD/YYYY" required>
-        <br><br>
-
-        <button type="submit">Schedule Appointment</button>
-    </form>
-
-    <br><a href="/logout">Logout</a>
+    <div class="dashboard-actions">
+      <a href="/view_all_appointments" class="dashboard-button">View All Appointments</a>
+      <a href="/schedule_appointment" class="dashboard-button">Schedule New Appointment</a>
+      <a href="/patient_checkin" class="dashboard-button">Patient Check-In</a>
+      <a href="/logout" class="dashboard-button logout">Logout</a>
+    </div>
+  </div>
 </body>
 </html>
+

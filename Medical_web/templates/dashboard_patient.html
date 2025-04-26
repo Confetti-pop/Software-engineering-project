@@ -1,42 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Patient Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <h2>Welcome, {{ user.name }} ({{ user_id }})</h2>
-    <br><br>
-    <a href="/patient/report" class="print-report-btn">🖨️ View Printable Report</a>
-    
-    <h3>🩺 Prescriptions</h3>
-    <ul>
-        {% if data.prescriptions %}
-            {% for med in data.prescriptions %}
-                <li>{{ med }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No prescriptions yet.</li>
-        {% endif %}
-    </ul>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Welcome, {{ username }}</h1>
+    <p class="dashboard-subtitle">Access your health services below.</p>
 
-    <h3>📅 Appointments</h3>
-    <ul>
-        {% if data.appointments %}
-            {% for appt in data.appointments %}
-                <li>{{ appt }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No appointments scheduled.</li>
-        {% endif %}
-    </ul>
-<!-- Appointment History Button -->
-<br>
-<a href="/patient/appointments" class="button-link">📅 View Appointment History</a>
-
-<a href="{{ url_for('schedule_appointment') }}" class="btn-schedule">Schedule Appointment</a>
-
-    <br>
-    <a href="/logout">Logout</a>
+    <div class="dashboard-actions">
+      <a href="/appointment_history" class="dashboard-button">View Appointment History</a>
+      <a href="/schedule_appointment" class="dashboard-button">Schedule Appointment</a>
+      <a href="/patient_report" class="dashboard-button">View Medical Report</a>
+      <a href="/logout" class="dashboard-button logout">Logout</a>
+    </div>
+  </div>
 </body>
 </html>

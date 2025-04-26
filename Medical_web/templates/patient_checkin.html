@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Check-In</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Patient Check-In</h1>
+    <p class="dashboard-subtitle">Please enter patient information to check in.</p>
+
+    <form class="checkin-form" method="POST" action="/checkin_success">
+      <input type="text" name="patient_name" placeholder="Patient Full Name" required>
+      <input type="text" name="appointment_id" placeholder="Appointment ID (if available)" required>
+      <button type="submit">Check In</button>
+    </form>
+
+    <a href="/frontdesk_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+  </div>
+</body>
+</html>
+
