@@ -315,6 +315,10 @@ def analytics_dashboard():
         medication_counts=medication_counts
     )
 
+@app.route('/schedule_appointment')
+def schedule_appointment():
+    return render_template('schedule_appointment.html')
+
 # Logout and clear session
 @app.route('/logout')
 def logout():

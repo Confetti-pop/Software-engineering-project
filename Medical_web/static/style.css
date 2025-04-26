@@ -140,3 +140,40 @@ body.blended-login {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/*Schedule Page styling */
+.schedule-page {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.page-header {
+  text-align: center;
+  padding: 20px;
+}
+
+.doctor-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.btn-schedule {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1e73e8;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.btn-schedule:hover {
+  background-color: #155bb5;
+}
