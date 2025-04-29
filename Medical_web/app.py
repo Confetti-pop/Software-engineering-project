@@ -143,13 +143,13 @@ def login():
 
         # Role-based redirection
         if user['role'] == 'admin':
-            return redirect(url_for('admin_dashboard'))
+            return redirect(url_for('dashboard_admin'))
         elif user['role'] == 'doctor':
-            return redirect(url_for('doctor_dashboard'))
+            return redirect(url_for('dashboard_doctor'))
         elif user['role'] == 'frontdesk':
-            return redirect(url_for('frontdesk_dashboard'))
+            return redirect(url_for('dashboard_frontdesk'))
         else:
-            return redirect(url_for('patient_dashboard'))
+            return redirect(url_for('dashboard_patient'))
     else:
         return render_template('login.html', error='Invalid credentials')
 
