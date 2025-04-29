@@ -519,11 +519,7 @@ def view_users():
     if 'username' not in session or session['role'] != 'admin':
         return redirect(url_for('login'))
 
-    # Filter users by role
-    doctors = {k: v for k, v in users.items() if v['role'] == 'doctor'}
-    patients = {k: v for k, v in users.items() if v['role'] == 'patient'}
-    frontdesks = {k: v for k, v in users.items() if v['role'] == 'frontdesk'}
-    return render_template('view_users.html')
+    return render_template('view_users.html', users=users)
 
 @app.route('/view_activity_logs')
 def view_activity_logs():
