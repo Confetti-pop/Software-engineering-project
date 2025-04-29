@@ -143,7 +143,7 @@ def login():
 
         # Role-based redirection
         if user['role'] == 'admin':
-            return redirect(url_for('dashboard_admin'))
+            return redirect(url_for('admin_dashboard'))
         elif user['role'] == 'doctor':
             return redirect(url_for('dashboard_doctor'))
         elif user['role'] == 'frontdesk':
