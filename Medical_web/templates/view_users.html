@@ -2,13 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View All Users</title>
+    <title>All Users</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
-        <h1>All Registered Users</h1>
-        <p class="dashboard-subtitle">This page will display all users in the system.</p>
+        <h1>All Users</h1>
+
+        <h2>Doctors</h2>
+        <ul>
+            {% for username, info in doctors.items() %}
+                <li>{{ info.name }} ({{ username }})</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Patients</h2>
+        <ul>
+            {% for username, info in patients.items() %}
+                <li>{{ info.name }} ({{ username }})</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Front Desk</h2>
+        <ul>
+            {% for username, info in frontdesks.items() %}
+                <li>{{ info.name }} ({{ username }})</li>
+            {% endfor %}
+        </ul>
+
         <a href="/admin_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Admin Dashboard</a>
     </div>
 </body>
