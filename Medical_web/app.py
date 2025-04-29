@@ -513,6 +513,15 @@ def admin_dashboard():
     name = users[session['username']]['name']
     return render_template('admin_dashboard.html', name=name)
 
+# Admin routes
+@app.route('/view_users')
+def view_users():
+    return render_template('view_users.html')
+
+@app.route('/view_activity_logs')
+def view_activity_logs():
+    return render_template('view_activity_logs.html')
+
 # Logout and clear session
 @app.route('/logout')
 def logout():
