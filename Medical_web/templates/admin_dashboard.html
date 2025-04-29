@@ -1,0 +1,31 @@
+from pathlib import Path
+
+# Create a basic HTML admin dashboard layout
+admin_dashboard_html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Welcome, {{ name }}</h1>
+        <p class="dashboard-subtitle">Manage system users and view activity below.</p>
+
+        <div class="dashboard-actions">
+            <a href="/view_users" class="dashboard-button">View All Users</a>
+            <a href="/view_activity_logs" class="dashboard-button">View Login Activity</a>
+            <a href="/logout" class="dashboard-button logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+# Save to admin_dashboard.html
+output_path = Path("/mnt/data/admin_dashboard.html")
+output_path.write_text(admin_dashboard_html.strip())
+
+output_path.name

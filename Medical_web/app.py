@@ -47,9 +47,13 @@ users = {
         "password": "frontpass",
         "role": "frontdesk",
         "name": "Reception Staff"
+    },
+    "admin1": {
+        "password": "adminpass",
+        "role": "admin",
+        "name": "Administrator"
     }
 }
-
 
 # --- Simulated patient medical data ---
 # Stored in-memory for this simulation
@@ -490,7 +494,14 @@ def edit_patient_record():
 
     return render_template('edit_patient_record.html', patient=patient)
 
-
+# Admin Dashboard Route
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    if 'username' not in session or session['role'] != 'admin':
+        return redirect(url_for('login'))
+    
+    name = users[session['username']]['name']
+    return render_template('admin_dashboard.html', name=name)
 
 # Logout and clear session
 @app.route('/logout')

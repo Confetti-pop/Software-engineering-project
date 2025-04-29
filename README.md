@@ -41,6 +41,10 @@ This is a console-based medical record system designed for a software engineerin
 
 🔑 Logins
 
+Admin:
+
+Username: admin1 | Password: adminpass
+
 Patients:
 
 Username: patient1 | Password: pass1
@@ -60,3 +64,4 @@ Username: drjohnson | Password: rheuma123
 Front Desk:
 
 Username: frontdesk1 | Password: frontpass
+
