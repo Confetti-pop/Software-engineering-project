@@ -8,8 +8,13 @@
 <body class="dashboard-page">
     <div class="dashboard-container">
         <h1>Login Activity Logs</h1>
-        <p class="dashboard-subtitle">This page will show login activity for all users.</p>
-        <a href="/admin_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Admin Dashboard</a>
+        <ul>
+            {% for log in logs %}
+                <li>{{ log.timestamp }} — <strong>{{ log.username }}</strong> ({{ log.role }}) logged in</li>
+            {% endfor %}
+        </ul>
+        <a href="/admin_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
     </div>
 </body>
 </html>
+

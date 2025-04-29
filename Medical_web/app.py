@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)  # Enable cross-origin access
 app.secret_key = 'secretkey123'       # Required for session tracking
 appointments = []                     # In-Memory Appointment Storage 
+login_log = []
 
 # --- Simulated user database ---
 # username: { password, role, display name }
@@ -126,7 +127,6 @@ def home():
     return render_template('login.html')
 
 # Login validation and session setup
-# Login validation and session setup
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -140,6 +140,12 @@ def login():
         session['username'] = username
         session['role'] = user['role']
         session['name'] = user['name']
+
+        login_log.append({
+            "username": username,
+            "role": user["role"],
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
 
         # Role-based redirection
         if user['role'] == 'admin':
