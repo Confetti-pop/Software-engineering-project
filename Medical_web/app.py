@@ -126,6 +126,7 @@ def home():
     return render_template('login.html')
 
 # Login validation and session setup
+# Login validation and session setup
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -138,8 +139,17 @@ def login():
     if user and user['password'] == password:
         session['username'] = username
         session['role'] = user['role']
-        session['name'] = user['name']   # 👉 ADD THIS LINE
-        return redirect(url_for('dashboard'))
+        session['name'] = user['name']
+
+        # Role-based redirection
+        if user['role'] == 'admin':
+            return redirect(url_for('admin_dashboard'))
+        elif user['role'] == 'doctor':
+            return redirect(url_for('doctor_dashboard'))
+        elif user['role'] == 'frontdesk':
+            return redirect(url_for('frontdesk_dashboard'))
+        else:
+            return redirect(url_for('patient_dashboard'))
     else:
         return render_template('login.html', error='Invalid credentials')
 
