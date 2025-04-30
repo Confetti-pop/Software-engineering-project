@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Patient Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Patient Dashboard</title>
+    <!-- Link to external CSS for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
-    <h1>Welcome, {{ name }}!</h1>
-    <p class="dashboard-subtitle">Access your health services below.</p>
+    <div class="dashboard-container">
+        <!-- Display welcome message with patient's name -->
+        <h1>Welcome, {{ name }}!</h1>
+        <p class="dashboard-subtitle">Access your health services below.</p>
 
-    <div class="dashboard-actions">
-      <a href="/appointment_history" class="dashboard-button">View Appointment History</a>
-      <a href="/schedule_appointment" class="dashboard-button">Schedule Appointment</a>
-      <a href="/patient_report" class="dashboard-button">View Medical Report</a>
-      <a href="{{ url_for('patient_medical_history') }}" class="dashboard-button">View Medical History</a>
-      <a href="{{ url_for('view_profile') }}" class="dashboard-button">View Profile</a>
-      <a href="/logout" class="dashboard-button logout">Logout</a>
+        <!-- Navigation buttons for patient actions -->
+        <div class="dashboard-actions">
+            <!-- Link to view past appointments -->
+            <a href="/appointment_history" class="dashboard-button">View Appointment History</a>
+
+            <!-- Link to schedule a new appointment -->
+            <a href="/schedule_appointment" class="dashboard-button">Schedule Appointment</a>
+
+            <!-- Link to view a printable medical report -->
+            <a href="/patient_report" class="dashboard-button">View Medical Report</a>
+
+            <!-- Link to view detailed medical history -->
+            <a href="{{ url_for('patient_medical_history') }}" class="dashboard-button">View Medical History</a>
+
+            <!-- Link to view/edit the patient's profile -->
+            <a href="{{ url_for('view_profile') }}" class="dashboard-button">View Profile</a>
+
+            <!-- Logout button -->
+            <a href="/logout" class="dashboard-button logout">Logout</a>
+        </div>
     </div>
-  </div>
 </body>
 </html>

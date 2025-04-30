@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Check-In Success</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Check-In Success</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
 
+    <!-- Display flashed messages if any exist -->
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-message">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
+        {% if messages %}
+            <div class="flash-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>  <!-- Output each flashed message -->
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endwith %}
 
+    <!-- Confirmation heading and subtitle -->
     <h1>Check-In Successful!</h1>
     <p class="dashboard-subtitle">The patient has been successfully checked in.</p>
 
+    <!-- Button to return to the Front Desk Dashboard -->
     <a href="/dashboard_frontdesk" class="dashboard-button">Back to Dashboard</a>
-  </div>
+
+</div>
 </body>
 </html>

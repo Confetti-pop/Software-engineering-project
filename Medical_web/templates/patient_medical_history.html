@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Medical History</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
         <h1>Your Medical History</h1>
+
+        <!-- Table to display list of patient visits -->
         <table class="data-table">
             <tr>
+                <!-- Table headers -->
                 <th>Date</th>
                 <th>Visit Reason</th>
                 <th>Diagnosis</th>
                 <th>Medications</th>
             </tr>
+
+            <!-- Loop through the list of visits passed to the template -->
             {% for visit in visits %}
             <tr>
+                <!-- Display each field of the visit -->
                 <td>{{ visit['date'] }}</td>
                 <td>{{ visit['reason'] }}</td>
                 <td>{{ visit['diagnosis'] }}</td>
@@ -25,7 +32,10 @@
             {% endfor %}
         </table>
 
-        <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+        <!-- Button to go back to patient dashboard -->
+        <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button" style="margin-top: 20px;">
+            Back to Dashboard
+        </a>
     </div>
 </body>
 </html>

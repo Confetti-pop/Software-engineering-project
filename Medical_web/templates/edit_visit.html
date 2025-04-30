@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Patient Visit</title>
+    <!-- Link to external CSS for consistent styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
+        <!-- Page heading -->
         <h1>Edit Patient Visit</h1>
 
+        <!-- Form to edit an existing patient visit, submitted via POST -->
         <form method="POST" class="checkin-form">
+            <!-- Patient name input, pre-filled with existing data -->
             <input type="text" name="patient_name" value="{{ visit.patient_name }}" required>
+
+            <!-- Doctor name input, pre-filled with existing data -->
             <input type="text" name="doctor_name" value="{{ visit.doctor_name }}" required>
+
+            <!-- Date of visit input, pre-filled -->
             <input type="date" name="visit_date" value="{{ visit.visit_date }}" required>
+
+            <!-- Diagnosis input, pre-filled -->
             <input type="text" name="diagnosis" value="{{ visit.diagnosis }}" required>
+
+            <!-- Treatment details, pre-filled and multiline -->
             <textarea name="treatment" rows="4" required>{{ visit.treatment }}</textarea>
+
+            <!-- Submit button to save changes -->
             <button type="submit">Save Changes</button>
         </form>
 
+        <!-- Button to return to the visit list -->
         <a href="{{ url_for('view_visits') }}" class="dashboard-button" style="margin-top: 20px;">Back to Visits</a>
     </div>
 </body>

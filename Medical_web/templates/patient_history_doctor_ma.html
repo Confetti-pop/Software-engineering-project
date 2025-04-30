@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient Medical History</title>
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
         <h1>Patient Medical History</h1>
 
+        <!-- Check if any visits exist -->
         {% if visits %}
+        <!-- Table to display visit history -->
         <table class="data-table">
             <tr>
+                <!-- Table headers -->
                 <th>Date</th>
                 <th>Diagnosis</th>
                 <th>Treatment</th>
                 <th>Doctor</th>
             </tr>
+
+            <!-- Loop through each visit and display data -->
             {% for visit in visits %}
             <tr>
                 <td>{{ visit['visit_date'] }}</td>
@@ -26,11 +32,16 @@
             </tr>
             {% endfor %}
         </table>
+
         {% else %}
+        <!-- Message if no visit records are available -->
         <p>No medical history available for this patient.</p>
         {% endif %}
 
-        <a href="{{ url_for('select_patient_history') }}" class="dashboard-button" style="margin-top: 20px;">Back to Selection</a>
+        <!-- Back button to return to patient selection -->
+        <a href="{{ url_for('select_patient_history') }}" class="dashboard-button" style="margin-top: 20px;">
+            Back to Selection
+        </a>
     </div>
 </body>
 </html>

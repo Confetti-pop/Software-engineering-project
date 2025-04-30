@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>MA Dashboard</title>
+    <!-- Link to external CSS for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
+        <!-- Welcome message for the medical assistant -->
         <h1>Welcome, {{ name }}!</h1>
         <p class="dashboard-subtitle">Manage patient visits and assist doctors.</p>
 
         <div class="dashboard-actions">
+            <!-- Button to go to the form to record a patient visit -->
             <a href="{{ url_for('record_visit') }}" class="dashboard-button">Record Patient Visit</a>
+
+            <!-- Button to view all recorded visits -->
             <a href="/view_visits" class="dashboard-button">View All Visits</a>
+
+            <!-- Button to view the medical history for the logged-in patient -->
             <a href="{{ url_for('view_medical_history') }}" class="dashboard-button">View Patient Medical History</a>
+
+            <!-- Button to select a patient to view history -->
             <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
+
+            <!-- Logout button -->
             <a href="/logout" class="dashboard-button logout">Logout</a>
         </div>
     </div>

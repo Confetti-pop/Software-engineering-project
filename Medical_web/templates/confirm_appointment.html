@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Confirm Appointment</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Confirm Appointment</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
+
+    <!-- Page heading -->
     <h1>Confirm Your Appointment</h1>
-    <p class="dashboard-subtitle">You selected <strong>{{ doctor_name }}</strong> — <em>{{ specialty }}</em></p>
 
+    <!-- Subtitle displaying selected doctor and their specialty -->
+    <p class="dashboard-subtitle">
+        You selected <strong>{{ doctor_name }}</strong> – <em>{{ specialty }}</em>
+    </p>
+
+    <!-- Appointment confirmation form -->
     <form class="confirm-form" method="POST" action="/appointment_success">
-      <label for="date">Choose Date:</label>
-      <input type="date" id="date" name="date" required>
 
-      <label for="time">Choose Time:</label>
-      <input type="time" id="time" name="time" required>
+        <!-- Input for selecting the appointment date -->
+        <label for="date">Choose Date:</label>
+        <input type="date" id="date" name="date" required>
 
-      <input type="hidden" name="doctor" value="{{ doctor_name }}">
+        <!-- Input for selecting the appointment time -->
+        <label for="time">Choose Time:</label>
+        <input type="time" id="time" name="time" required>
 
-      <button type="submit">Confirm Appointment</button>
+        <!-- Hidden input to pass the doctor's name without showing it in the form -->
+        <input type="hidden" name="doctor" value="{{ doctor_name }}">
+
+        <!-- Submit button to confirm the appointment -->
+        <button type="submit">Confirm Appointment</button>
     </form>
 
-    <a href="/schedule_appointment" class="dashboard-button" style="margin-top: 20px;">Back to Doctor List</a>
-  </div>
+    <!-- Link to go back to the doctor selection/scheduling page -->
+    <a href="/schedule_appointment" class="dashboard-button" style="margin-top: 20px;">
+        Back to Doctor List
+    </a>
+</div>
 </body>
 </html>
 

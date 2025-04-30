@@ -1,13 +1,22 @@
+<!-- Doctor list container -->
 <div class="doctor-list">
-    {% for doctor in doctors %}
+  <!-- Loop through all doctors -->
+  {% for doctor in doctors %}
+      <!-- Form to schedule an appointment with a specific doctor -->
       <form action="/schedule" method="POST" class="doctor-card">
-        <input type="hidden" name="doctor_name" value="{{ doctor.name }}">
-        <input type="hidden" name="specialty" value="{{ doctor.specialty }}">
-        <input type="hidden" name="contact" value="{{ doctor.contact }}">
-        <input type="hidden" name="building" value="{{ doctor.building }}">
-        <input type="hidden" name="address" value="{{ doctor.address }}">
-        <button type="submit" class="doctor-name-button">{{ doctor.name }} — {{ doctor.specialty }}</button>
+          <!-- Hidden inputs to pass doctor details through POST request -->
+          <input type="hidden" name="doctor_name" value="{{ doctor.name }}">
+          <input type="hidden" name="specialty" value="{{ doctor.specialty }}">
+          <input type="hidden" name="contact" value="{{ doctor.contact }}">
+          <input type="hidden" name="building" value="{{ doctor.building }}">
+          <input type="hidden" name="address" value="{{ doctor.address }}">
+          
+          <!-- Submit button displays doctor's name and specialty -->
+          <button type="submit" class="doctor-name-button">
+              {{ doctor.name }} – {{ doctor.specialty }}
+          </button>
       </form>
-    {% endfor %}
-  </div>
+  {% endfor %}
+</div>
+
   

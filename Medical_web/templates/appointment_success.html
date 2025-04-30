@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Appointment Confirmed</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Appointment Confirmed</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
 
+    <!-- Display flashed messages if there are any -->
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
+        {% if messages %}
         <div class="flash-message">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
+            {% for message in messages %}
+                <p>{{ message }}</p>  <!-- Output each message -->
+            {% endfor %}
         </div>
-      {% endif %}
+        {% endif %}
     {% endwith %}
 
+    <!-- Confirmation header and appointment details -->
     <h1>Appointment Confirmed!</h1>
     <p class="dashboard-subtitle">
-      You have an appointment with <strong>{{ doctor }}</strong> on <strong>{{ date }}</strong> at <strong>{{ time }}</strong>.
+        You have an appointment with <strong>{{ doctor }}</strong> 
+        on <strong>{{ date }}</strong> 
+        at <strong>{{ time }}</strong>.
     </p>
 
+    <!-- Button to return to the user's dashboard -->
     <a href="/dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
-  </div>
+
+</div>
 </body>
 </html>

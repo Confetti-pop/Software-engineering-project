@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Profile</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <!-- Link to external stylesheet for page styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
-    <h1>Edit Your Profile</h1>
-    <form method="POST" class="form-box">
-      <label>Name:</label>
-      <input type="text" name="name" value="{{ user.name }}" required><br>
+    <div class="dashboard-container">
+        <!-- Page heading -->
+        <h1>Edit Your Profile</h1>
 
-      <label>Phone Number:</label>
-      <input type="text" name="phone" value="{{ user.phone }}" required><br>
+        <!-- Form to update user's profile information -->
+        <form method="POST" class="form-box">
+            <!-- Input for updating name -->
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ user.name }}" required><br>
 
-      <label>Address:</label>
-      <input type="text" name="address" value="{{ user.address }}" required><br>
+            <!-- Input for updating phone number -->
+            <label>Phone Number:</label>
+            <input type="text" name="phone" value="{{ user.phone }}" required><br>
 
-      <button type="submit" class="dashboard-button">Save Changes</button>
-    </form>
-    <br>
-    <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button">Back to Dashboard</a>
-  </div>
+            <!-- Input for updating address -->
+            <label>Address:</label>
+            <input type="text" name="address" value="{{ user.address }}" required><br>
+
+            <!-- Submit button to save changes -->
+            <button type="submit" class="dashboard-button">Save Changes</button>
+        </form>
+        <br>
+
+        <!-- Button to go back to the patient dashboard -->
+        <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button">Back to Dashboard</a>
+    </div>
 </body>
 </html>

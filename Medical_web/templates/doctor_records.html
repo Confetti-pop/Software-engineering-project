@@ -4,28 +4,34 @@
     <title>Doctor Dashboard</title>
 </head>
 <body>
+    <!-- Heading for the Doctor Dashboard page -->
     <h2>Doctor Dashboard - Patient Records</h2>
 
+    <!-- Loop through each patient record in the dictionary 'records' -->
     {% for patient_id, info in records.items() %}
+        <!-- Container for each patient section -->
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
+            <!-- Display the patient's name and ID -->
             <h3>{{ info.name }} ({{ patient_id }})</h3>
 
+            <!-- Section for listing prescriptions -->
             <strong>Prescriptions:</strong>
             <ul>
                 {% if info.prescriptions %}
                     {% for p in info.prescriptions %}
-                        <li>{{ p }}</li>
+                        <li>{{ p }}</li> <!-- Each prescription -->
                     {% endfor %}
                 {% else %}
                     <li>No prescriptions yet.</li>
                 {% endif %}
             </ul>
 
+            <!-- Section for listing appointments -->
             <strong>Appointments:</strong>
             <ul>
                 {% if info.appointments %}
                     {% for a in info.appointments %}
-                        <li>{{ a }}</li>
+                        <li>{{ a }}</li> <!-- Each appointment -->
                     {% endfor %}
                 {% else %}
                     <li>No appointments yet.</li>

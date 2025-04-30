@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Doctor Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <!-- Link to external CSS stylesheet for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
+
+    <!-- Personalized welcome message with the logged-in doctor's name -->
     <h1>Welcome, {{ name }}!</h1>
     <p class="dashboard-subtitle">Manage your appointments, reports, and analytics below.</p>
 
+    <!-- Action buttons for various doctor functionalities -->
     <div class="dashboard-actions">
-      <a href="/view_appointments" class="dashboard-button">View Scheduled Appointments</a>
-      <a href="/view_patient_reports" class="dashboard-button">View Patient Reports</a>
-      <a href="/analytics" class="dashboard-button">View Analytics</a>
-      <a href="/edit_patient_record" class="dashboard-button">Edit Patient Records</a>
-      <a href="/medication_inventory" class="dashboard-button">Medication Inventory</a>
-      <a href="/prescribe_medicine" class="dashboard-button">Prescribe Medicine</a>
-      <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
-      <a href="/logout" class="dashboard-button logout">Logout</a>
+
+        <!-- Link to view all appointments for the doctor -->
+        <a href="/view_appointments" class="dashboard-button">View Scheduled Appointments</a>
+
+        <!-- Link to view reports about patients -->
+        <a href="/view_patient_reports" class="dashboard-button">View Patient Reports</a>
+
+        <!-- Link to view usage or health analytics -->
+        <a href="/analytics" class="dashboard-button">View Analytics</a>
+
+        <!-- Link to edit patient medical records -->
+        <a href="/edit_patient_record" class="dashboard-button">Edit Patient Records</a>
+
+        <!-- Link to see or update the medication inventory -->
+        <a href="/medication_inventory" class="dashboard-button">Medication Inventory</a>
+
+        <!-- Link to prescribe medication to a patient -->
+        <a href="/prescribe_medicine" class="dashboard-button">Prescribe Medicine</a>
+
+        <!-- Link to view patient history using dynamic Flask routing -->
+        <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
+
+        <!-- Logout button to exit the dashboard -->
+        <a href="/logout" class="dashboard-button logout">Logout</a>
+
     </div>
-  </div>
+</div>
 </body>
 </html>

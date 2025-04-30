@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Patient Check-In</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Patient Check-In</title>
+    <!-- Link to the external stylesheet for consistent styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
-    <h1>Patient Check-In</h1>
-    <p class="dashboard-subtitle">Please enter patient information to check in.</p>
+    <div class="dashboard-container">
+        <h1>Patient Check-In</h1>
+        <!-- Subtitle to guide the user -->
+        <p class="dashboard-subtitle">Please enter patient information to check in.</p>
 
-    <form class="checkin-form" method="POST" action="/checkin_success">
-      <input type="text" name="patient_name" placeholder="Patient Full Name" required>
-      <input type="text" name="appointment_id" placeholder="Appointment ID (if available)" required>
-      <button type="submit">Check In</button>
-    </form>
+        <!-- Form to submit check-in data -->
+        <form class="checkin-form" method="POST" action="/checkin_success">
+            <!-- Patient full name input -->
+            <input type="text" name="patient_name" placeholder="Patient Full Name" required>
 
-    <a href="/dashboard_frontdesk" class="dashboard-button">Back to Dashboard</a>
-  </div>
+            <!-- Appointment ID input (optional but required in the UI) -->
+            <input type="text" name="appointment_id" placeholder="Appointment ID (if available)" required>
+
+            <!-- Submit button -->
+            <button type="submit">Check In</button>
+        </form>
+
+        <!-- Link to return to the front desk dashboard -->
+        <a href="/dashboard_frontdesk" class="dashboard-button">Back to Dashboard</a>
+    </div>
 </body>
 </html>
-

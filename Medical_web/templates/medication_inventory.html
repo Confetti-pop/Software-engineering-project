@@ -4,13 +4,16 @@
     <title>Medication Inventory</title>
 </head>
 <body>
-    <h2>📦 Medication Inventory</h2>
+    <!-- Page Title -->
+    <h2>💊 Medication Inventory</h2>
 
+    <!-- Table showing the current inventory of medications -->
     <table border="1" cellpadding="8">
         <tr>
             <th>Medication</th>
             <th>Quantity</th>
         </tr>
+        <!-- Loop through medication inventory dictionary -->
         {% for name, qty in meds.items() %}
         <tr>
             <td>{{ name }}</td>
@@ -19,18 +22,25 @@
         {% endfor %}
     </table>
 
+    <!-- Section to update or add medications -->
     <h3>Update or Add Medication</h3>
     <form method="POST">
+        <!-- Input for medication name -->
         <label>Medication Name:</label>
         <input type="text" name="med_name" required>
         <br><br>
+
+        <!-- Input for quantity -->
         <label>Quantity:</label>
         <input type="number" name="quantity" min="0" required>
         <br><br>
+
+        <!-- Submit button -->
         <button type="submit">Update Inventory</button>
     </form>
 
+    <!-- Back link to dashboard -->
     <br>
-    <a href="/dashboard">⬅ Back to Dashboard</a>
+    <a href="/dashboard">← Back to Dashboard</a>
 </body>
 </html>

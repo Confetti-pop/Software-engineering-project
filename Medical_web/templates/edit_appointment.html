@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Appointment</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Edit Appointment</title>
+    <!-- Link to external stylesheet for consistent styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
+<div class="dashboard-container">
+    <!-- Page heading -->
     <h1>Edit Appointment</h1>
+
+    <!-- Form for editing an existing appointment -->
     <form method="POST">
-      <label>Date:</label>
-      <input type="date" name="date" value="{{ appointment.date }}" required><br>
-      <label>Time:</label>
-      <input type="time" name="time" value="{{ appointment.time }}" required><br>
-      <label for="doctor">Doctor:</label>
-      <input type="text" name="doctor" value="{{ appointment.doctor }}" required>
-      <button type="submit">Update Appointment</button>
+        <!-- Input field for appointment date -->
+        <label>Date:</label>
+        <input type="date" name="date" value="{{ appointment.date }}" required><br>
+
+        <!-- Input field for appointment time -->
+        <label>Time:</label>
+        <input type="time" name="time" value="{{ appointment.time }}" required><br>
+
+        <!-- Input field for doctor's name -->
+        <label for="doctor">Doctor:</label>
+        <input type="text" name="doctor" value="{{ appointment.doctor }}" required><br>
+
+        <!-- Submit button to update the appointment -->
+        <button type="submit">Update Appointment</button>
     </form>
+
     <br>
+    <!-- Link to navigate back to the list of all appointments -->
     <a href="{{ url_for('view_all_appointments') }}" class="dashboard-button">Back</a>
-  </div>
+</div>
 </body>
 </html>

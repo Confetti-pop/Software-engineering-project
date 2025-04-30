@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Patient Record</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
 <div class="dashboard-container">
+    <!-- Page title with dynamic patient name -->
     <h1>Edit Patient Record for {{ patient.name }}</h1>
 
+    <!-- Show success message if record was updated -->
     {% if success %}
     <p style="color: green;">Record updated successfully!</p>
     {% endif %}
 
+    <!-- Form for editing patient medical records -->
     <form method="POST">
+        <!-- Medical Conditions textarea -->
         <label>Medical Conditions:</label><br>
         <textarea name="medical_conditions" rows="3" cols="50">{{ patient.medical_conditions }}</textarea><br><br>
 
+        <!-- Medications textarea -->
         <label>Medications:</label><br>
         <textarea name="medications" rows="3" cols="50">{{ patient.medications }}</textarea><br><br>
 
+        <!-- Treatment Plan textarea -->
         <label>Treatment Plan:</label><br>
         <textarea name="treatment_plan" rows="3" cols="50">{{ patient.treatment_plan }}</textarea><br><br>
 
+        <!-- Submit button to save changes -->
         <button type="submit" class="dashboard-button">Save Changes</button>
     </form>
 
     <br>
+    <!-- Link to return to the doctor dashboard -->
     <a href="/dashboard_doctor" class="dashboard-button logout">Back to Dashboard</a>
 </div>
 </body>
