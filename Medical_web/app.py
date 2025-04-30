@@ -555,46 +555,43 @@ def dashboard_ma():
 # Route for medical assistant to record a patient visit
 @app.route('/record_visit', methods=['GET', 'POST'])
 def record_visit():
-    # Make sure only a logged-in medical assistant can access this
+    # Restrict access to medical assistants
     if 'username' not in session or session['role'] != 'ma':
         return redirect(url_for('login'))
 
     if request.method == 'POST':
-        # Collect visit data from form submission
+        # Collect data from form
         patient_name = request.form['patient_name']
         doctor_name = request.form['doctor_name']
         visit_date = request.form['visit_date']
         diagnosis = request.form['diagnosis']
         treatment = request.form['treatment']
 
-        # Store the visit as a dictionary in the global list
+        # Store the visit in memory
         visit_records.append({
-            "id": len(visit_records),  # Unique visit ID
+            "id": len(visit_records),
             "patient_name": patient_name,
             "doctor_name": doctor_name,
             "visit_date": visit_date,
             "diagnosis": diagnosis,
             "treatment": treatment,
-            "patient_username": patient_name.lower().replace(" ", ""),  # for demo purposes
+            "patient_username": patient_name.lower().replace(" ", ""),
             "created_by": session['username']
         })
 
-        # Notify the user
         flash("Patient visit recorded successfully!")
-
-        # Redirect back to the MA dashboard
         return redirect(url_for('dashboard_ma'))
 
-    # Show the form if GET request
+    # Show the form if it's a GET request
     return render_template('record_visit.html')
 
 @app.route('/view_visits')
 def view_visits():
-    # Only allow access to logged-in MAs or doctors
-    if 'username' not in session or session['role'] not in ['ma', 'doctor']:
+    # Allow access to logged-in MAs, doctors, or patients
+    if 'username' not in session or session['role'] not in ['ma', 'doctor', 'patient']:
         return redirect(url_for('login'))
-    
-    # Only show relevant visits
+
+    # Show visits depending on role
     if session['role'] == 'patient':
         filtered_visits = [v for v in visit_records if v.get('patient_username') == session['username']]
     elif session['role'] in ['doctor', 'ma']:
