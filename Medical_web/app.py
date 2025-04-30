@@ -553,7 +553,7 @@ def dashboard_ma():
     return render_template('ma_dashboard.html', name=name)
 
 @app.route('/record_visit')
-def test_record():
+def record_visit():
     return "The route is working!"
 
 
