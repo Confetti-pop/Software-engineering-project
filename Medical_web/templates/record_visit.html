@@ -11,7 +11,7 @@
         <h1>Record Patient Visit</h1>
 
         <!-- Form for medical assistants to enter visit details -->
-        <form method="POST" class="checkin-form">
+        <form method="POST" action="{{ url_for('record_visit') }}" class="checkin-form">
             <!-- Patient's full name -->
             <input type="text" name="patient_name" placeholder="Patient Full Name" required>
             
