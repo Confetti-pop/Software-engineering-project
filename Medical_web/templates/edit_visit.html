@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Patient Visit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Edit Patient Visit</h1>
+
+        <form method="POST" class="checkin-form">
+            <input type="text" name="patient_name" value="{{ visit.patient_name }}" required>
+            <input type="text" name="doctor_name" value="{{ visit.doctor_name }}" required>
+            <input type="date" name="visit_date" value="{{ visit.visit_date }}" required>
+            <input type="text" name="diagnosis" value="{{ visit.diagnosis }}" required>
+            <textarea name="treatment" rows="4" required>{{ visit.treatment }}</textarea>
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <a href="{{ url_for('view_visits') }}" class="dashboard-button" style="margin-top: 20px;">Back to Visits</a>
+    </div>
+</body>
+</html>

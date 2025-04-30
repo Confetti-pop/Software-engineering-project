@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MA Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Welcome, {{ name }}!</h1>
+        <p class="dashboard-subtitle">Manage patient visits and assist doctors.</p>
+
+        <div class="dashboard-actions">
+            <a href="/record_patient_visit" class="dashboard-button">Record Patient Visit</a>
+            <a href="/view_visits" class="dashboard-button">View All Visits</a>
+            <a href="{{ url_for('view_medical_history') }}" class="dashboard-button">View Patient Medical History</a>
+            <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
+            <a href="/logout" class="dashboard-button logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

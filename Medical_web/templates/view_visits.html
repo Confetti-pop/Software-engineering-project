@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Patient Visits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Recorded Patient Visits</h1>
+
+        <!-- Check if there are any visits recorded -->
+        {% if visits %}
+        <table border="1" cellpadding="8" cellspacing="0">
+            <tr>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Date</th>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Action</th>
+            </tr>
+
+            <!-- Loop through each visit and display details -->
+            {% for visit in visits %}
+            <tr>
+                <td>{{ visit.patient_name }}</td>
+                <td>{{ visit.doctor_name }}</td>
+                <td>{{ visit.visit_date }}</td>
+                <td>{{ visit.diagnosis }}</td>
+                <td>{{ visit.treatment }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No visits have been recorded yet.</p>
+        {% endif %}
+
+        <!-- Button to return to previous dashboard -->
+        {% if session['role'] == 'ma' %}
+            <a href="{{ url_for('dashboard_ma') }}" class="dashboard-button">Back to MA Dashboard</a>
+        {% else %}
+            <a href="{{ url_for('dashboard_doctor') }}" class="dashboard-button">Back to Doctor Dashboard</a>
+        {% endif %}
+        <td>
+            {% if session['role'] == 'ma' and visit.created_by == session['username'] %}
+    <a href="{{ url_for('edit_visit', visit_id=visit.id) }}">Edit</a>
+    <form action="{{ url_for('delete_visit', visit_id=visit.id) }}" method="POST" style="display:inline;">
+        <button type="submit" onclick="return confirm('Are you sure you want to delete this visit?');">Delete</button>
+    </form>
+{% else %}
+    —
+{% endif %}
+
+          </td>
+          
+    </div>
+</body>
+</html>

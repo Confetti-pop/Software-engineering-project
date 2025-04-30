@@ -7,7 +7,8 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)  # Enable cross-origin access
 app.secret_key = 'secretkey123'       # Required for session tracking
 appointments = []                     # In-Memory Appointment Storage 
-login_log = []
+login_log = []                        # Stores login history
+visit_records = []                    # Global list to store recorded patient visits
 
 # --- Simulated user database ---
 # username: { password, role, display name }
@@ -16,12 +17,16 @@ users = {
         "password": "pass1",
         "role": "patient",
         "name": "Alice Smith",
+        "phone": "123-456-7890",     
+        "address": "123 Main St",
         "appointments": []
     },
     "patient2": {
         "password": "pass2",
         "role": "patient",
         "name": "Bob Jones",
+        "phone": "281-445-2890",
+        "address": "456 Main st",
         "appointments": []
     },
     "drsmith": {
@@ -53,6 +58,11 @@ users = {
         "password": "adminpass",
         "role": "admin",
         "name": "Administrator"
+    },
+    "ma1": {
+        "password": "mapass",
+        "role": "ma",
+        "name": "Medical Assistant"
     }
 }
 
@@ -148,17 +158,19 @@ def login():
         })
 
         # Role-based redirection
-        if user['role'] == 'admin':
-            return redirect(url_for('admin_dashboard'))
-        elif user['role'] == 'doctor':
-            return redirect(url_for('dashboard_doctor'))
-        elif user['role'] == 'frontdesk':
-            return redirect(url_for('dashboard_frontdesk'))
-        else:
-            return redirect(url_for('dashboard_patient'))
+    if user['role'] == 'admin':
+        return redirect(url_for('admin_dashboard'))
+    elif user['role'] == 'doctor':
+        return redirect(url_for('dashboard_doctor'))
+    elif user['role'] == 'frontdesk':
+        return redirect(url_for('dashboard_frontdesk'))
+    elif user['role'] == 'ma':
+        return redirect(url_for('dashboard_ma'))
+    elif user['role'] == 'patient':
+        return redirect(url_for('dashboard_patient'))
     else:
         return render_template('login.html', error='Invalid credentials')
-
+    
 # Main dashboard route with role-based content
 @app.route("/dashboard")
 def dashboard():
@@ -530,6 +542,217 @@ def view_users():
 @app.route('/view_activity_logs')
 def view_activity_logs():
     return render_template('view_activity_logs.html')
+
+# Medical Assistant 
+@app.route('/dashboard_ma')
+def dashboard_ma():
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
+    
+    name = users[session['username']]['name']
+    return render_template('ma_dashboard.html', name=name)
+
+# Route for medical assistant to record a patient visit
+@app.route('/record_visit', methods=['GET', 'POST'])
+def record_visit():
+    # Make sure only a logged-in medical assistant can access this
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        # Collect visit data from form submission
+        patient_name = request.form['patient_name']
+        doctor_name = request.form['doctor_name']
+        visit_date = request.form['visit_date']
+        diagnosis = request.form['diagnosis']
+        treatment = request.form['treatment']
+
+        # Store the visit as a dictionary in the global list
+        visit_records.append({
+            "id": len(visit_records),  # Unique visit ID
+            "patient_name": patient_name,
+            "doctor_name": doctor_name,
+            "visit_date": visit_date,
+            "diagnosis": diagnosis,
+            "treatment": treatment,
+            "patient_username": patient_name.lower().replace(" ", ""),  # for demo purposes
+            "created_by": session['username']
+        })
+
+        # Notify the user
+        flash("Patient visit recorded successfully!")
+
+        # Redirect back to the MA dashboard
+        return redirect(url_for('dashboard_ma'))
+
+    # Show the form if GET request
+    return render_template('record_visit.html')
+
+@app.route('/view_visits')
+def view_visits():
+    # Only allow access to logged-in MAs or doctors
+    if 'username' not in session or session['role'] not in ['ma', 'doctor']:
+        return redirect(url_for('login'))
+    
+    # Only show relevant visits
+    if session['role'] == 'patient':
+        filtered_visits = [v for v in visit_records if v.get('patient_username') == session['username']]
+    elif session['role'] in ['doctor', 'ma']:
+        filtered_visits = visit_records
+    else:
+        return redirect(url_for('login'))
+
+    return render_template('view_visits.html', visits=filtered_visits)
+
+# Part of editing information
+@app.route('/edit_visit/<int:visit_id>', methods=['GET', 'POST'])
+def edit_visit(visit_id):
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
+
+    visit = next((v for v in visit_records if v['id'] == visit_id), None)
+    if not visit:
+        flash("Visit not found.")
+        return redirect(url_for('view_visits'))
+
+    if request.method == 'POST':
+        # Update visit info with new values
+        visit['patient_name'] = request.form['patient_name']
+        visit['doctor_name'] = request.form['doctor_name']
+        visit['visit_date'] = request.form['visit_date']
+        visit['diagnosis'] = request.form['diagnosis']
+        visit['treatment'] = request.form['treatment']
+        flash("Visit updated successfully!")
+        return redirect(url_for('view_visits'))
+
+    return render_template('edit_visit.html', visit=visit)
+
+# Deleting past information
+@app.route('/delete_visit/<int:visit_id>', methods=['POST'])
+def delete_visit(visit_id):
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
+
+    global visit_records
+    # Filter out the visit with the matching ID
+    visit_records = [v for v in visit_records if v['id'] != visit_id]
+    flash("Visit deleted successfully.")
+    return redirect(url_for('view_visits'))
+
+# Viewing history
+@app.route('/ma/view_history', methods=['GET', 'POST'])
+def view_medical_history():
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
+
+    filtered_visits = visit_records  # start with all visits
+
+    if request.method == 'POST':
+        search_name = request.form.get('patient_name', '').lower()
+        search_date = request.form.get('visit_date', '')
+
+        # Filter by name and/or date
+        filtered_visits = [
+            visit for visit in visit_records
+            if (search_name in visit['patient_name'].lower()) and
+               (search_date in visit['date'])
+        ]
+
+    return render_template('view_history.html', visits=filtered_visits)
+
+# Patient medical history
+@app.route('/patient_medical_history')
+def patient_medical_history():
+    if 'username' not in session or session['role'] != 'patient':
+        return redirect(url_for('login'))
+
+    username = session['username']
+    # Filter only that patient’s visits
+    patient_visits = [v for v in visit_records if v['patient_username'] == username]
+    return render_template('patient_medical_history.html', visits=patient_visits)
+
+# Display dropdown to select patient
+@app.route('/select_patient_history')
+def select_patient_history():
+    if 'username' not in session or session['role'] not in ['doctor', 'ma']:
+        return redirect(url_for('login'))
+    
+    # Get all patient usernames
+    patient_list = {k: v['name'] for k, v in users.items() if v['role'] == 'patient'}
+    return render_template('select_patient_history.html', patients=patient_list)
+
+# Handle patient selection and show history
+@app.route('/view_patient_history', methods=['POST'])
+def view_patient_history():
+    if 'username' not in session or session['role'] not in ['doctor', 'ma']:
+        return redirect(url_for('login'))
+
+    patient_id = request.form.get('patient_id')
+    visits = [v for v in visit_records if v['patient_id'] == patient_id]
+    
+    return render_template('patient_history_doctor_ma.html', visits=visits)
+
+# Edit Appointment Route
+@app.route("/edit_appointment/<int:appointment_id>", methods=["GET", "POST"])
+def edit_appointment(appointment_id):
+    if "username" not in session or session.get("role") != "frontdesk":
+        flash("Access denied. Please log in as Front Desk.")
+        return redirect("/login")
+
+    try:
+        # Fetch the selected appointment
+        appointment = appointments[appointment_id]
+    except IndexError:
+        flash("Appointment not found.")
+        return redirect("/view_all_appointments")
+
+    if request.method == "POST":
+        # Get updated data from the form
+        new_date = request.form.get("date")
+        new_time = request.form.get("time")
+        new_doctor = request.form.get("doctor")
+
+        # Update appointment values
+        appointment["date"] = new_date
+        appointment["time"] = new_time
+        appointment["doctor"] = new_doctor
+
+        flash("Appointment updated successfully.")
+        return redirect("/view_all_appointments")
+
+    return render_template("edit_appointment.html", appointment=appointment, appointment_id=appointment_id)
+
+# Route for patients to update their personal info
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    # Check if user is logged in and is a patient
+    if 'username' not in session or session['role'] != 'patient':
+        flash("Access denied. Please log in as a patient.")
+        return redirect(url_for('login'))
+
+    username = session['username']
+    user = users[username]
+
+    if request.method == 'POST':
+        # Update only editable fields
+        user['name'] = request.form['name']
+        user['phone'] = request.form['phone']
+        user['address'] = request.form['address']
+        flash("Profile updated successfully.")
+        return redirect(url_for('dashboard_patient'))  # Redirect after save
+
+    return render_template('edit_profile.html', user=user)
+
+# View profile
+@app.route("/view_profile")
+def view_profile():
+    if "username" not in session or session["role"] != "patient":
+        flash("Access denied. Please log in as a patient.")
+        return redirect("/login")
+    
+    user = users[session["username"]]
+    return render_template("view_profile.html", user=user)
+
 
 # Logout and clear session
 @app.route('/logout')

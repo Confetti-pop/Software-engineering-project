@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Medical History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+
+         <!-- Search Form for filtering visits -->
+<form method="POST" class="search-form" style="margin-bottom: 20px;">
+    <input type="text" name="patient_name" placeholder="Search by patient name">
+    <input type="date" name="visit_date">
+    <button type="submit">Search</button>
+</form>
+
+        <h1>Patient Medical History</h1>
+        <table class="data-table">
+            <tr>
+                <th>Patient Name</th>
+                <th>Date</th>
+                <th>Visit Reason</th>
+                <th>Diagnosis</th>
+                <th>Medications</th>
+            </tr>
+            {% for visit in visits %}
+            <tr>
+                <td>{{ visit['patient_name'] }}</td>
+                <td>{{ visit['date'] }}</td>
+                <td>{{ visit['reason'] }}</td>
+                <td>{{ visit['diagnosis'] }}</td>
+                <td>{{ visit['medications'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('dashboard_ma') }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

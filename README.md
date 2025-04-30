@@ -1,67 +1,102 @@
-🏥 # Software-engineering-project
-# 🏥 Medical Record System – Software Engineering Project
+🏥 Medical Record System – Software Engineering Project
 
-This is a console-based medical record system designed for a software engineering course project. It simulates real-world functionality for **patients and doctors**, including login authentication, treatment plans, appointments, and medical history.
+This is a web-based medical record system designed for a software engineering course project. It simulates real-world functionality for patients, doctors, medical assistants, front desk staff, and admins, including login authentication, treatment plans, appointments, and visit records.
 
----
+🔐 Features
 
-## 🔐 Features
+✅ Login System
 
-### ✅ Login System
-- Supports two user roles: Doctor and Patient
-- Username/password login (predefined accounts)
+Supports multiple roles: Admin, Doctor, Patient, Medical Assistant, Front Desk
 
-### 👨‍⚕️ Doctor Dashboard
-- View all patients
-- View individual patient medical history
-- Create and assign treatment plans
-- View all assigned treatment plans
-- View scheduled appointments
+Role-based dashboard redirection
 
-### 👩‍🦽 Patient Dashboard
-- View personal information
-- View scheduled appointments
-- View assigned treatment plans
-- View medical history
-- Update contact/address info
+👨‍⚕️ Doctor Dashboard
 
----
+View appointments
 
-## 🧪 How to Run
+View patient medical history
 
-### Requirements
-- Python 3.x
-- No external libraries required
+Assign and view treatment plans
 
-### Run the Program
-1. Open the project in **Visual Studio Code**
-2. Open medical_system.py
-3. Press Ctrl + F5 or right-click and choose **Run Python File in Terminal**
-4. Log in using:
+View all recorded visits
 
-🔑 Logins
+👩‍🦽 Patient Dashboard
 
-Admin:
+View and edit profile
 
-Username: admin1 | Password: adminpass
+View scheduled appointments
 
-Patients:
+View treatment plans
 
-Username: patient1 | Password: pass1
+View personal medical visit history
 
-Username: patient2 | Password: pass2
+🧑‍🔬 Medical Assistant Dashboard
 
-Doctors:
+Record patient visits
 
-Username: drsmith | Password: cardio123
+View, edit, and delete visits they created
 
-Username: drwilliams | Password: radio123
+View any patient’s visit history by selecting from a list
 
-Username: drwilson | Password: onco123
+🧾 Front Desk Dashboard
 
-Username: drjohnson | Password: rheuma123
+Schedule new appointments for patients
 
-Front Desk:
+View, edit, and cancel all upcoming appointments
 
-Username: frontdesk1 | Password: frontpass
+Check-in patients for their appointments
 
+🛡️ Admin Dashboard
+
+View all users
+
+Monitor login activity across the system
+
+🧪 How to Run
+
+Requirements
+
+Python 3.x
+
+Flask (install via pip install flask)
+
+Run the Program
+
+Open the project folder in Visual Studio Code or your preferred editor.
+
+In the terminal, navigate to the folder where app.py is located:
+
+cd Medical_web
+
+Run the app:
+
+python app.py
+
+Log in using one of the test accounts listed below.
+
+🔑 Sample Logins
+
+Patient
+
+Username: patient1
+Password: pass1
+
+Doctor
+
+Username: doctor1
+Password: docpass
+
+Medical Assistant
+
+Username: ma1
+Password: mapass
+
+Front Desk
+
+Username: front1
+Password: frontpass
+
+Admin
+
+Username: admin
+Password: adminpass

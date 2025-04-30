@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record Patient Visit</title>
+    <!-- Link to external CSS for consistent layout -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Record Patient Visit</h1>
+
+        <!-- Form for medical assistants to enter visit details -->
+        <form method="POST" class="checkin-form">
+            <!-- Patient's full name -->
+            <input type="text" name="patient_name" placeholder="Patient Full Name" required>
+            
+            <!-- Doctor's name -->
+            <input type="text" name="doctor_name" placeholder="Doctor Name" required>
+            
+            <!-- Date of the visit -->
+            <input type="date" name="visit_date" required>
+            
+            <!-- Diagnosis made during the visit -->
+            <input type="text" name="diagnosis" placeholder="Diagnosis" required>
+            
+            <!-- Treatment details (multi-line input) -->
+            <textarea name="treatment" placeholder="Treatment Provided" rows="4" required></textarea>
+            
+            <!-- Submit button to record visit -->
+            <button type="submit">Submit Visit</button>
+        </form>
+
+        <!-- Link to go back to the medical assistant's dashboard -->
+        <a href="{{ url_for('dashboard_ma') }}" class="dashboard-button" style="margin-top: 20px;">
+            Back to Dashboard
+        </a>
+    </div>
+</body>
+</html>

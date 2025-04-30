@@ -14,11 +14,11 @@
       <a href="/view_appointments" class="dashboard-button">View Scheduled Appointments</a>
       <a href="/view_patient_reports" class="dashboard-button">View Patient Reports</a>
       <a href="/analytics" class="dashboard-button">View Analytics</a>
-      <a href="/logout" class="dashboard-button logout">Logout</a>
       <a href="/edit_patient_record" class="dashboard-button">Edit Patient Records</a>
       <a href="/medication_inventory" class="dashboard-button">Medication Inventory</a>
       <a href="/prescribe_medicine" class="dashboard-button">Prescribe Medicine</a>
-      <a href="/dashboard_doctor" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+      <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
+      <a href="/logout" class="dashboard-button logout">Logout</a>
     </div>
   </div>
 </body>

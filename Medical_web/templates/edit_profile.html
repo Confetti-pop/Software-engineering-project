@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    <h1>Edit Your Profile</h1>
+    <form method="POST" class="form-box">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{ user.name }}" required><br>
+
+      <label>Phone Number:</label>
+      <input type="text" name="phone" value="{{ user.phone }}" required><br>
+
+      <label>Address:</label>
+      <input type="text" name="address" value="{{ user.address }}" required><br>
+
+      <button type="submit" class="dashboard-button">Save Changes</button>
+    </form>
+    <br>
+    <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button">Back to Dashboard</a>
+  </div>
+</body>
+</html>

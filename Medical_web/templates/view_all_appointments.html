@@ -21,6 +21,7 @@
         <form action="/cancel_appointment/{{ idx }}" method="POST">
           <button type="submit" class="cancel-button">Cancel Appointment</button>
         </form>
+        <a href="{{ url_for('edit_appointment', appointment_id=idx) }}" class="edit-button">Edit</a>
       </li>
     {% endfor %}
   </ul>

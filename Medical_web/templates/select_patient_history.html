@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Patient History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Select a Patient</h1>
+        <form action="{{ url_for('view_patient_history') }}" method="post">
+            <select name="patient_id" required>
+                {% for username, name in patients.items() %}
+                    <option value="{{ username }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">View History</button>
+        </form>
+        <a href="{{ url_for('dashboard_' + session['role']) }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

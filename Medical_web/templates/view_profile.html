@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Your Profile</h1>
+        <ul class="profile-info">
+            <li><strong>Name:</strong> {{ user.name }}</li>
+            <li><strong>Phone:</strong> {{ user.phone }}</li>
+            <li><strong>Address:</strong> {{ user.address }}</li>
+        </ul>
+        
+        <a href="{{ url_for('edit_profile') }}" class="dashboard-button">Edit Profile</a>
+
+        <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Medical History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <h1>Patient Medical History</h1>
+
+        {% if visits %}
+        <table class="data-table">
+            <tr>
+                <th>Date</th>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Doctor</th>
+            </tr>
+            {% for visit in visits %}
+            <tr>
+                <td>{{ visit['visit_date'] }}</td>
+                <td>{{ visit['diagnosis'] }}</td>
+                <td>{{ visit['treatment'] }}</td>
+                <td>{{ visit['doctor_name'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No medical history available for this patient.</p>
+        {% endif %}
+
+        <a href="{{ url_for('select_patient_history') }}" class="dashboard-button" style="margin-top: 20px;">Back to Selection</a>
+    </div>
+</body>
+</html>
