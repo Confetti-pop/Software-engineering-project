@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set character encoding -->
     <meta charset="UTF-8">
+    
+    <!-- Page title -->
     <title>All Users</title>
+    
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-    <div class="dashboard-container">
-        <h1>All Users</h1>
-<ul>
-  {% for username, info in users.items() %}
-    <li><strong>{{ info['role'].capitalize() }}</strong>: {{ info['name'] }} (Username: {{ username }})</li>
-  {% endfor %}
-</ul>
 
+    <div class="dashboard-container">
+        <!-- Page heading -->
+        <h1>All Users</h1>
+
+        <!-- Unordered list of users -->
+        <ul>
+            <!-- Loop through all users in the system -->
+            {% for username, info in users.items() %}
+                <li>
+                    <!-- Display role (capitalized), name, and username -->
+                    <strong>{{ info['role'].capitalize() }}</strong>: {{ info['name'] }} (Username: {{ username }})
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Back button to return to the admin dashboard -->
         <a href="/admin_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Admin Dashboard</a>
     </div>
+
 </body>
 </html>

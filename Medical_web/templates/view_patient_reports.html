@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Page title -->
     <title>Patient Reports</title>
+
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Page header -->
         <h1>Patient Reports</h1>
 
+        <!-- List of patients -->
         <ul>
             {% for patient in patients %}
             <li>
+                <!-- Display patient details -->
                 <strong>Name:</strong> {{ patient.name }} <br>
                 <strong>DOB:</strong> {{ patient.dob }} <br>
                 <strong>Last Visit:</strong> {{ patient.last_visit }} <br>
                 <strong>Medical Conditions:</strong> {{ patient.medical_conditions }} <br>
+
+                <!-- Display prescriptions in a nested list -->
                 <strong>Prescriptions:</strong>
                 <ul>
                     {% for prescription in patient.prescriptions %}
-                        <li>{{ prescription }}</li>
+                    <li>{{ prescription }}</li>
                     {% endfor %}
                 </ul>
             </li>
+            <!-- Separator between patients -->
             <hr>
             {% endfor %}
         </ul>
 
+        <!-- Button to go back to doctor dashboard -->
         <a href="/dashboard_doctor" class="btn">Back to Dashboard</a>
     </div>
 </body>

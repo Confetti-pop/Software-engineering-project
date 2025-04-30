@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Page title -->
     <title>Login Activity Logs</title>
+
+    <!-- Link to CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
+        <!-- Heading -->
         <h1>Login Activity Logs</h1>
+
+        <!-- Unordered list for displaying each log entry -->
         <ul>
             {% for log in logs %}
-                <li>{{ log.timestamp }} — <strong>{{ log.username }}</strong> ({{ log.role }}) logged in</li>
+            <li>
+                <!-- Display the timestamp, username, and role of the user -->
+                {{ log.timestamp }} - 
+                <strong>{{ log.username }}</strong> ({{ log.role }}) logged in
+            </li>
             {% endfor %}
         </ul>
+
+        <!-- Button to return to the admin dashboard -->
         <a href="/admin_dashboard" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
     </div>
 </body>
 </html>
-

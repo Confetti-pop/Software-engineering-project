@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Define character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Set the page title -->
     <title>Medical Record</title>
+
+    <!-- Link to external stylesheet for consistent design -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Page header with the patient's name -->
         <h1>Medical Record for {{ record.name }}</h1>
 
+        <!-- Display individual medical record details -->
         <ul>
             <li><strong>Date of Birth:</strong> {{ record.dob }}</li>
             <li><strong>Blood Type:</strong> {{ record.blood_type }}</li>
@@ -18,6 +25,7 @@
             <li><strong>Last Visit:</strong> {{ record.last_visit }}</li>
         </ul>
 
+        <!-- Navigation button to return to the patient dashboard -->
         <a href="/dashboard_patient" class="btn">Back to Dashboard</a>
     </div>
 </body>

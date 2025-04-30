@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set character encoding -->
     <meta charset="UTF-8">
+    
+    <!-- Page title -->
     <title>Your Profile</title>
+    
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
+        <!-- Profile heading -->
         <h1>Your Profile</h1>
+        
+        <!-- List displaying user profile information -->
         <ul class="profile-info">
             <li><strong>Name:</strong> {{ user.name }}</li>
             <li><strong>Phone:</strong> {{ user.phone }}</li>
             <li><strong>Address:</strong> {{ user.address }}</li>
         </ul>
-        
+
+        <!-- Button to go to the edit profile page -->
         <a href="{{ url_for('edit_profile') }}" class="dashboard-button">Edit Profile</a>
 
+        <!-- Button to return to the patient dashboard -->
         <a href="{{ url_for('dashboard_patient') }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
     </div>
 </body>

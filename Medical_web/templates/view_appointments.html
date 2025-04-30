@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Doctor Appointments</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Define character encoding -->
+    <meta charset="UTF-8">
+    
+    <!-- Set page title -->
+    <title>Doctor Appointments</title>
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
-  <div class="dashboard-container">
-    <h1>Your Scheduled Appointments</h1>
+    <div class="dashboard-container">
+        <!-- Page header -->
+        <h1>Your Scheduled Appointments</h1>
 
-    {% if appointments %}
-      <ul class="appointment-list">
-        {% for appt in appointments %}
-          <li>
-            <strong>Patient:</strong> {{ appt.patient }}<br>
-            <strong>Date:</strong> {{ appt.date }}<br>
-            <strong>Time:</strong> {{ appt.time }}
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="dashboard-subtitle">No appointments scheduled yet.</p>
-    {% endif %}
+        <!-- Check if there are any appointments -->
+        {% if appointments %}
+            <ul class="appointment-list">
+                <!-- Loop through each appointment and display patient, date, and time -->
+                {% for appt in appointments %}
+                    <li>
+                        <strong>Patient:</strong> {{ appt.patient }}<br>
+                        <strong>Date:</strong> {{ appt.date }}<br>
+                        <strong>Time:</strong> {{ appt.time }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <!-- Display message if there are no appointments -->
+            <p class="dashboard-subtitle">No appointments scheduled yet.</p>
+        {% endif %}
 
-    <a href="/dashboard_doctor" class="dashboard-button" style="margin-top: 20px;">Back to Doctor Dashboard</a>
-  </div>
+        <!-- Navigation button back to doctor dashboard -->
+        <a href="/dashboard_doctor" class="dashboard-button" style="margin-top: 20px;">Back to Doctor Dashboard</a>
+    </div>
 </body>
 </html>

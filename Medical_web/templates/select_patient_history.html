@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Page title -->
     <title>Select Patient History</title>
+
+    <!-- Link to CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-container">
+        <!-- Page header -->
         <h1>Select a Patient</h1>
+
+        <!-- Form to select a patient and submit to view their history -->
         <form action="{{ url_for('view_patient_history') }}" method="post">
             <select name="patient_id" required>
+                <!-- Loop through patients dictionary and create an option for each -->
                 {% for username, name in patients.items() %}
-                    <option value="{{ username }}">{{ name }}</option>
+                <option value="{{ username }}">{{ name }}</option>
                 {% endfor %}
             </select>
+
+            <!-- Submit button -->
             <button type="submit">View History</button>
         </form>
-        <a href="{{ url_for('dashboard_' + session['role']) }}" class="dashboard-button" style="margin-top: 20px;">Back to Dashboard</a>
+
+        <!-- Button to go back to the appropriate dashboard based on role -->
+        <a href="{{ url_for('dashboard_' + session['role']) }}" 
+           class="dashboard-button" 
+           style="margin-top: 20px;">Back to Dashboard</a>
     </div>
 </body>
 </html>
