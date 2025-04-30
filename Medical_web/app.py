@@ -552,7 +552,7 @@ def dashboard_ma():
     name = users[session['username']]['name']
     return render_template('ma_dashboard.html', name=name)
 
-@app.route('/test_record_visit')
+@app.route('/record_visit')
 def test_record():
     return "The route is working!"
 
