@@ -552,11 +552,40 @@ def dashboard_ma():
     name = users[session['username']]['name']
     return render_template('ma_dashboard.html', name=name)
 
-@app.route('/record_visit')
+# Route for medical assistant to record a patient visit
+@app.route('/record_visit', methods=['GET', 'POST'])
 def record_visit():
-    return "The route is working!"
+    # Restrict access to medical assistants
+    if 'username' not in session or session['role'] != 'ma':
+        return redirect(url_for('login'))
 
+    if request.method == 'POST':
+        # Collect data from form
+        patient_name = request.form['patient_name']
+        doctor_name = request.form['doctor_name']
+        visit_date = request.form['visit_date']
+        diagnosis = request.form['diagnosis']
+        treatment = request.form['treatment']
 
+        # Store the visit in memory
+        visit_records.append({
+            "id": len(visit_records),
+            "patient_name": patient_name,
+            "doctor_name": doctor_name,
+            "visit_date": visit_date,
+            "diagnosis": diagnosis,
+            "treatment": treatment,
+            "patient_username": patient_name.lower().replace(" ", ""),
+            "created_by": session['username']
+        })
+
+        flash("Patient visit recorded successfully!")
+        return redirect(url_for('dashboard_ma'))
+
+    # Show the form if it's a GET request
+    return render_template('record_visit.html')
+
+# MA can view visits 
 @app.route('/view_visits')
 def view_visits():
     # Allow access to logged-in MAs, doctors, or patients

@@ -11,7 +11,7 @@
         <p class="dashboard-subtitle">Manage patient visits and assist doctors.</p>
 
         <div class="dashboard-actions">
-            <a href="/record_patient_visit" class="dashboard-button">Record Patient Visit</a>
+            <a href="{{ url_for('record_visit') }}" class="dashboard-button">Record Patient Visit</a>
             <a href="/view_visits" class="dashboard-button">View All Visits</a>
             <a href="{{ url_for('view_medical_history') }}" class="dashboard-button">View Patient Medical History</a>
             <a href="{{ url_for('select_patient_history') }}" class="dashboard-button">View Patient History</a>
